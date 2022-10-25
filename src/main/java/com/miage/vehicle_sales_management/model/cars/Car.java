@@ -1,12 +1,12 @@
-package com.miage.vehicle_sales_management.entities.cars;
+package com.miage.vehicle_sales_management.model.cars;
 
-public class Truck extends Vehicle {
+public class Car extends Vehicle {
     private String type;
 
-    public Truck() {
+    public Car() {
     }
 
-    public Truck(String type) {
+    public Car(String type) {
         this.type = type;
     }
 

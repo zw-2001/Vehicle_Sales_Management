@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+<!-- start session -->
+
 <html>
 <head>
     <title>JSP - Hello World</title>

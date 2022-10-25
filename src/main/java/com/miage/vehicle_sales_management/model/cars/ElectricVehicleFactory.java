@@ -1,4 +1,4 @@
-package com.miage.vehicle_sales_management.entities.cars;
+package com.miage.vehicle_sales_management.model.cars;
 
 public class ElectricVehicleFactory implements VehicleFactory {
 
