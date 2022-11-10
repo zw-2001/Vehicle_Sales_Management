@@ -12,19 +12,19 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView userLogin(@RequestParam("username") String username, @RequestParam("password") String password) {
+    public ModelAndView userLogin(@RequestParam("email") String username, @RequestParam("password") String password) {
 
         ModelAndView mv = new ModelAndView();
 
-        User user = new User(username, password);
+        User user = new User
         UserDao userDao = new UserDao();
         int login = userDao.loginUser(user);
 
         if (login != 0) {
-            mv.addObject("msg", "Welcome " + user.getUsername() + ", You have successfully logged in.");
+            mv.addObject("msg", "Welcome " + user.getEmail() + ", You have successfully logged in.");
             mv.setViewName("welcome");
         } else {
-            mv.addObject("msg", "Invalid username or password.");
+            mv.addObject("msg", "Invalid email or password.");
             mv.setViewName("index");
         }
         return mv;
