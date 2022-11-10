@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<!-- start session -->
 
 <html>
 <head>
@@ -21,7 +20,7 @@
     <form action="login" method="POST">
 
         <div class="inputs">
-            <input type="email" placeholder="Email" name="userId">
+            <input type="text" placeholder="Username" name="username">
             <input type="password" placeholder="Password" name="password">
             <button type="submit">Se connecter</button>
         </div>

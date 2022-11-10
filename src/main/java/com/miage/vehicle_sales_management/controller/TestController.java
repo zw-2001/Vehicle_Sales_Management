@@ -6,11 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping(value = "/test")
 public class TestController {
 
-    User user = User.getInstance();
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public String index() {
+        System.out.println("testTest");
         return "test";
     }
 }

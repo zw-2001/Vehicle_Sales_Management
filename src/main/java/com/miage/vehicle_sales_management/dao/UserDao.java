@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 public class UserDao {
     private Connection con = ConnectionManager.getConnection();
     public int registerUser(User user) {
-        String sql = "INSERT INTO client (clientName, password) VALUES (?, ?)";
+        String sql = "INSERT INTO clients (username, password) VALUES (?, ?)";
         if (con != null) {
             try {
                 PreparedStatement ps = con.prepareStatement(sql);
@@ -26,7 +26,7 @@ public class UserDao {
     }
 
     public int loginUser(User user) {
-        String sql = "SELECT * FROM client WHERE clientName = ? AND password = ?";
+        String sql = "SELECT * FROM clients WHERE username = ? AND password = ?";
         if (con != null) {
             try {
                 PreparedStatement ps = con.prepareStatement(sql);

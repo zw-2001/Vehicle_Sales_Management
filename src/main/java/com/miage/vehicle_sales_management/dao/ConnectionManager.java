@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionManager {
     private static String url = "jdbc:mysql://localhost:3306/Vehicle_Sales_Management_DB_test";
-    private static String driverName = "com.mysql.jdbc.Driver";
+    private static String driverName = "com.mysql.cj.jdbc.Driver";
     private static String username = "root";
     private static String password = "password";
     private static Connection con;
