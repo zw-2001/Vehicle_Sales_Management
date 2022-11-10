@@ -2,45 +2,34 @@ package com.miage.vehicle_sales_management.controller;
 
 import com.miage.vehicle_sales_management.dao.UserDao;
 import com.miage.vehicle_sales_management.model.users.User;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
 @Controller
-public class LoginController {
-
-    @Autowired
+public class UserController {
     private UserDao userDao;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView userLogin(@RequestParam("userId") String userId, @RequestParam("password") String password) {
+    public ModelAndView userLogin(@RequestParam("username") String username, @RequestParam("password") String password) {
 
         ModelAndView mv = new ModelAndView();
 
-        User user = new User();
-        user.setUserId(userId);
+        User user = User.getInstance();
+        user.setUsername(username);
         user.setPassword(password);
 
-        String name = userDao.loginUser(user);
+        int login = userDao.loginUser(user);
 
-        if (name != null) {
-
-            mv.addObject("msg", "Welcome " + name + ", You have successfully logged in.");
+        if (login != 0) {
+            mv.addObject("msg", "Welcome " + user.getUsername() + ", You have successfully logged in.");
             mv.setViewName("welcome");
-
         } else {
-
-            mv.addObject("msg", "Invalid user id or password.");
+            mv.addObject("msg", "Invalid username or password.");
             mv.setViewName("login");
         }
-
         return mv;
-
     }
 }
-
