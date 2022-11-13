@@ -1,12 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Navbar</title>
-</head>
-<body>
-<nav th:fragment="admin" class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: transparent!important;">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: transparent!important;">
     <a class="navbar-brand logo" href="index.php?dossier=General&controller=generalgestion&function=generalaccueil">
-        <img  class ="avec"src ="View/Design/images/Logo.png" style="height : 100px">
+        <img  class ="avec"src ="resources/images/Logo.png" style="height : 100px">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,5 +20,3 @@
         <button class="button" type="submit">Se déconnecter</button>
     </form>
 </nav>
-</body>
-</html>

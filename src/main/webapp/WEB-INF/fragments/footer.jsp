@@ -1,10 +1,4 @@
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Title</title>
-</head>
-<body>
-
-<div th:fragment="footer" class ="footer">
+<div class ="footer">
     <div class ="content-footer">
         <div class ="footer-section about">
             <p>L'esprit automobile</p>
@@ -18,15 +12,10 @@
             <span>Chenlong Huang</span>
             <span>Chelsey Millo</span>
             <span>William Zhang</span>
-
         </div>
-
     </div>
-
 
     <div class ="footer-bottom">
         &copy; ChenWheels.fr | Designed by CW
     </div>
 </div>
-</body>
-</html>

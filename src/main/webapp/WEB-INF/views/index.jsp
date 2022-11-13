@@ -1,21 +1,21 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title>Cupcake</title>
-    <link rel="stylesheet" href="<c:url value="https://unpkg.com/swiper/swiper-bundle.min.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />" />
-    <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />" />
-    <script src="<c:url value="https://kit.fontawesome.com/cfa21a103c.js" />" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="resources/css/style.css" />
+    <script src="https://kit.fontawesome.com/cfa21a103c.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 <header>
     <div class="background-image-container bg-index">
         <div class="background-image-overlay"></div>
+        <jsp:include page="/WEB-INF/fragments/${navbar}.jsp" />
+
         <div class="cadre">
             <div class="txt animated pulse ">
                 <h1 style ="color : white">Louez plus qu'une voiture ${navbar}</h1>
@@ -49,19 +49,14 @@
                     <button type="button" class="btn btn-outline-primary" style="margin-top:20px">Voir</button>
                 </a>
             </div>
-
-
         </div>
     </div>
-
-
 
     <div class="swiper-container">
 
         <div class="container-title">
             <h1>Nos voitures</h1>
         </div>
-
 
         <div class="swiper-wrapper">
             <div class="swiper-slide" style="background-image:url(https://i.pinimg.com/originals/4f/d0/6c/4fd06c6aaa784d433f57a84d262c49d4.png)">
@@ -76,14 +71,14 @@
             <div class="swiper-slide" style="background-image:url(https://www.searchpng.com/wp-content/uploads/2019/01/renault-captur-car-png.png)">
                 <div id="carousel-title-car">Renault</div>
             </div>
-            <div class="swiper-slide" style="background-image:url(View/Design/images/Tesla.png)">
+            <div class="swiper-slide" style="background-image:url(resources/images/Tesla.png)">
                 <div id="carousel-title-car">Tesla</div>
             </div>
         </div>
     </div>
 </div>
 
-<div th:replace="fragments/footer :: footer"></div>
+<jsp:include page="/WEB-INF/fragments/footer.jsp" />
 
 
 
