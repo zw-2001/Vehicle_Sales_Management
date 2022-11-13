@@ -1,52 +1,57 @@
 package com.miage.vehicle_sales_management.model.users;
 
-import com.miage.vehicle_sales_management.dao.UserDao;
 /**
  * @author Lisa-Marie
  * User class : Define a simple user which is not a company, neither an admin
  */
 public class User {
-    private int ID_User;
-    private String lastName;
-    private String firstName;
+
+    private static User instance;
+    private int userId;
+    private String type;
     private String email;
     private String password;
+    private String lastName;
+    private String firstName;
 
     /**
-     * Main constructor of the User class
-     * @param ID_User
-     * @param lastName
-     * @param firstName
+     * Man constructor of the User class
+     * @param userId
+     * @param type
      * @param email
      * @param password
+     * @param lastName
+     * @param firstName
      */
-    public User(int ID_User, String lastName, String firstName, String email, String password) {
-        this.ID_User = ID_User;
-        this.lastName = lastName;
-        this.firstName = firstName;
+    private User(int userId, String type, String email, String password,  String lastName, String firstName) {
+        this.userId = userId;
+        this.type = type;
         this.email = email;
         this.password = password;
+        this.lastName = lastName;
+        this.firstName = firstName;
+    }
+
+    public static User getInstance() {
+        if (instance == null) {
+            instance = new User(-1, "", "", "", "", "");
+        }
+        return instance;
+    }
+    /**
+     * Get the id of the user
+     * @return userId
+     */
+    public int getUserId() {
+        return userId;
     }
 
     /**
-     * Second constructor of the User class
-     * @param lastName
-     * @param firstName
-     * @param email
-     * @param password
+     * Get the type of the user
+     * @return type
      */
-    public User(String lastName, String firstName, String email, String password) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.email = email;
-        this.password = password;
-    }
-    /**
-     * Get the ID of the user
-     * @return ID_User
-     */
-    public int getID_User() {
-        return ID_User;
+    public String getType() {
+        return type;
     }
     /**
      * Get the Lastname of the user
@@ -78,10 +83,13 @@ public class User {
     }
     /**
      * Set the ID of the user
-     * @param ID_User
+     * @param userId
      */
-    public void setID_User(int ID_User) {
-        this.ID_User = ID_User;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
     /**
      * Set the Lastname of the user
@@ -111,28 +119,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    /**
-     * Check if the user is an admin, return false because it's not the case here for
-     * a simple user
-     * @return false
-     */
-    public boolean isAdmin () {
-        return false;
-    }
-    /**
-     * Check if the user is a company, return false because it's not the case here for
-     * a simple user
-     * @return false
-     */
-    public boolean isCompany () {
-        return false;
-    }
-    /**
-     * Create an array of users in order to get all the user data
-     * @return Object[] user
-     */
-    public Object[] user() {
-        return new Object[]{lastName, firstName, email, password, isAdmin(), isCompany()};
-    }
-
 }

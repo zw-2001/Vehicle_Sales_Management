@@ -9,18 +9,16 @@ import java.sql.ResultSet;
 
 public class UserDao {
     private Connection con = ConnectionManager.getConnection();
-    public int registerUser(User user) {
-        String sql = "INSERT INTO users (Email, Password, LastName, FirstName, IS_Admin, IS_Company) VALUES (?, ?, ?, ?, ?, ?)";
+    public int registerUser(String email, String password, String lastName, String firstName) {
+        String sql = "INSERT INTO users (Email, Password, LastName, FirstName) VALUES (?, ?, ?, ?)";
 
         if (con != null) {
             try {
                 PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, user.getEmail());
-                ps.setString(2, user.getPassword());
-                ps.setString(3, user.getLastName());
-                ps.setString(4, user.getFirstName());
-                ps.setBoolean(5, user.isAdmin());
-                ps.setBoolean(6, user.isCompany());
+                ps.setString(1, email);
+                ps.setString(2, password);
+                ps.setString(3, lastName);
+                ps.setString(4, firstName);
                 ps.executeUpdate();
                 return 1;
             } catch (Exception e) {
@@ -30,15 +28,21 @@ public class UserDao {
         return 0;
     }
 
-    public int loginUser(User user) {
-        String sql = "SELECT * FROM users WHERE Email = ? AND password = ?";
+    public int loginUser(String email, String password) {
+        String sql = "SELECT * FROM Users WHERE Email = ? AND Password = ?";
         if (con != null) {
             try {
                 PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, user.getEmail());
-                ps.setString(2, user.getPassword());
+                ps.setString(1, email);
+                ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
+                    User user = User.getInstance();
+                    user.setUserId(rs.getInt("ID_User"));
+                    user.setEmail(rs.getString("Email"));
+                    user.setPassword(rs.getString("Password"));
+                    user.setLastName(rs.getString("LastName"));
+                    user.setFirstName(rs.getString("FirstName"));
                     return 1;
                 }
             } catch (Exception e) {
