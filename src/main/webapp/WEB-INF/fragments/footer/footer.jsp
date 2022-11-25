@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <div class ="footer">
     <div class ="content-footer">
         <div class ="footer-section about">
@@ -9,13 +11,18 @@
         </div>
         <div class ="footer-section links">
             <h3>Qui nous sommes ? </h3>
-            <span>Chenlong Huang</span>
-            <span>Chelsey Millo</span>
-            <span>William Zhang</span>
+            <a href="https://www.linkedin.com/in/william-zhang-2404/"
+               target="_blank" rel="noopener noreferrer">William Zhang</a>
+            <a href="https://www.linkedin.com/in/lisa-marie-zheng-lmz14/"
+               target="_blank" rel="noopener noreferrer">Lisa-Marie Zheng</a>
         </div>
     </div>
 
     <div class ="footer-bottom">
-        &copy; ChenWheels.fr | Designed by CW
+        &copy; Cupcake.fr | Designed by William Zhang & Lisa-Marie Zheng <br>
+        For Paris Dauphine-PSL M1 MIAGE Java Project
     </div>
 </div>
+
+<script src="https://kit.fontawesome.com/cfa21a103c.js" crossorigin="anonymous"></script>
+

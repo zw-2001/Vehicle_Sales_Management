@@ -1,24 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Cupcake</title>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="resources/css/style.css" />
-    <script src="https://kit.fontawesome.com/cfa21a103c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8.4.4/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/resources/css/style.css" />
 </head>
 
 <body>
 <header>
     <div class="background-image-container bg-index">
         <div class="background-image-overlay"></div>
-        <jsp:include page="/WEB-INF/fragments/${navbar}.jsp" />
-
+        <jsp:include page="/WEB-INF/fragments/navbar/${navbar}.jsp" />
         <div class="cadre">
             <div class="txt animated pulse ">
-                <h1 style ="color : white">Louez plus qu'une voiture ${navbar}</h1>
+                <h1 style ="color : white">Louez plus qu'une voiture</h1>
                 <p style ="color : white">Le pouvoir de rouler moins cher</p>
                 <div class="box-1">
                     <a href="login" >
@@ -53,36 +51,37 @@
     </div>
 
     <div class="swiper-container">
-
         <div class="container-title">
             <h1>Nos voitures</h1>
         </div>
-
         <div class="swiper-wrapper">
-            <div class="swiper-slide" style="background-image:url(https://i.pinimg.com/originals/4f/d0/6c/4fd06c6aaa784d433f57a84d262c49d4.png)">
-                <div id="carousel-title-car">Range Rover</div>
+            <div class="swiper-slide" style="background-image:url(/resources/images/cars/png/Range_Rover.png)">
+                <div class="carousel-title-car">Range Rover</div>
             </div>
-            <div class="swiper-slide" style="background-image:url(https://www.freepnglogos.com/uploads/mercedes-png/mercedes-amg-car-png-image-pngpix-9.png)">
-                <div id="carousel-title-car">Mercedes-Benz</div>
+            <div class="swiper-slide" style="background-image:url(/resources/images/cars/png/Mercedes.png)">
+                <div class="carousel-title-car">Mercedes-Benz</div>
             </div>
-            <div class="swiper-slide" style="background-image:url(https://pngimg.com/uploads/mini/mini_PNG11788.png)">
-                <div id="carousel-title-car">Mini</div>
+            <div class="swiper-slide" style="background-image:url(/resources/images/cars/png/Mini.png)">
+                <div class="carousel-title-car">Mini</div>
             </div>
-            <div class="swiper-slide" style="background-image:url(https://www.searchpng.com/wp-content/uploads/2019/01/renault-captur-car-png.png)">
-                <div id="carousel-title-car">Renault</div>
+            <div class="swiper-slide" style="background-image:url(/resources/images/cars/png/Renault.png)">
+                <div class="carousel-title-car">Renault</div>
             </div>
-            <div class="swiper-slide" style="background-image:url(resources/images/Tesla.png)">
-                <div id="carousel-title-car">Tesla</div>
+            <div class="swiper-slide" style="background-image:url(/resources/images/cars/png/Tesla.png)">
+                <div class="carousel-title-car">Tesla</div>
             </div>
         </div>
     </div>
 </div>
 
-<jsp:include page="/WEB-INF/fragments/footer.jsp" />
+<jsp:include page="/WEB-INF/fragments/footer/footer.jsp" />
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@8.4.4/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
-
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
     var swiper = new Swiper('.swiper-container', {
         effect: 'coverflow',
@@ -99,12 +98,5 @@
         loop:true,
     });
 </script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-
-
 </body>
 </html>

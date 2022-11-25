@@ -7,7 +7,6 @@ package com.miage.vehicle_sales_management.model.users;
 public class User {
 
     private static User instance;
-    private int userId;
     private String type;
     private String email;
     private String password;
@@ -16,15 +15,13 @@ public class User {
 
     /**
      * Man constructor of the User class
-     * @param userId
      * @param type
      * @param email
      * @param password
      * @param lastName
      * @param firstName
      */
-    private User(int userId, String type, String email, String password,  String lastName, String firstName) {
-        this.userId = userId;
+    private User(String type, String email, String password,  String lastName, String firstName) {
         this.type = type;
         this.email = email;
         this.password = password;
@@ -34,18 +31,10 @@ public class User {
 
     public static User getInstance() {
         if (instance == null) {
-            instance = new User(-1, "", "", "", "", "");
+            instance = new User("General", "", "", "", "");
         }
         return instance;
     }
-    /**
-     * Get the id of the user
-     * @return userId
-     */
-    public int getUserId() {
-        return userId;
-    }
-
     /**
      * Get the type of the user
      * @return type
@@ -82,12 +71,9 @@ public class User {
         return password;
     }
     /**
-     * Set the ID of the user
-     * @param userId
+     * Set the type of the user
+     * @param type
      */
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
     public void setType(String type) {
         this.type = type;
     }
@@ -118,5 +104,9 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void logout() {
+        instance = null;
     }
 }

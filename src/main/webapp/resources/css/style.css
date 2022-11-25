@@ -24,12 +24,12 @@ li a {
 /* ------------ BACKGROUND PARALLAX ------------ */
 
 .bg-location {
-    background: url(../images/roadtrip.jpg) repeat fixed 70%;
+    background: url(/resources/images/background/roadtrip.jpg) repeat fixed 70%;
     background-size: cover;
 }
 
 .bg-index {
-    background: url(../images/Tesla-Model-S.jpg) repeat fixed 70%;
+    background: url(/resources/images/background/Tesla-Model-S.jpg) repeat fixed 70%;
     background-size: cover;
 }
 
@@ -265,6 +265,7 @@ li a {
 .swiper-container {
     width: 100%;
     padding-bottom: 50px;
+    overflow-x: hidden;
 }
 
 .swiper-slide {
@@ -279,15 +280,14 @@ li a {
     padding-bottom: 50px;
 }
 
-#carousel-title-car {
+.carousel-title-car {
     color: black;
     text-align: center;
-    padding-top: 50%
+    padding-top: 50%;
 }
 
 .jumbotron .box {
     margin: 10px;
-    margin-left: 10px;
     background-position: center;
     background-size: cover;
     min-height: 210px;
@@ -374,6 +374,7 @@ li a {
     text-align: center;
     bottom: 0px;
     left: 0px;
+    padding-bottom: 5px;
 }
 
 .about {
@@ -386,7 +387,7 @@ li a {
     background-color: #393a4b;
 }
 
-.links span {
+.links a {
     color: white;
     display: flex;
     flex-direction: column;
@@ -394,7 +395,7 @@ li a {
     padding: 10px;
 }
 
-.links span:hover {
+.links a:hover {
     font-weight: BOLD;
     display: flex;
     flex-direction: column;
@@ -687,7 +688,6 @@ li a {
     font-size: 14px;
     text-decoration: none;
     text-transform: initial;
-    border: none;
     border-radius: .2rem;
     outline: none;
     padding: 0 1rem;
@@ -696,7 +696,7 @@ li a {
     color: #fff;
     transition: all 0.2s ease-in-out;
     background: #34393E;
-    border-color: #34393E;
+    border: none #34393E;
     cursor: pointer;
 }
 
