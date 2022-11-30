@@ -3,7 +3,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: transparent!important;">
     <a class="navbar-brand logo" href="/">
-        <img class ="avec" src ="/resources/images/logo/logo.png" style="height : 100px">
+        <img class="avec" src="/resources/images/logo/logo.png" style="height : 100px">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,26 +11,42 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto navbar-center ">
-            <c:set var = "user" scope = "session" value = "${user}"/>
-            <li color ="black ; font-weight: bold;"><a href="/catalog">Consultation des voitures</a></li>
-            <c:if test = "${user == 'Administrator'}">
-                <li color ="black ; font-weight: bold;"><a href="/add-car">Ajouter des Voitures</a></li>
+            <c:set var="user" scope="session" value="${user}"/>
+            <form action="/catalog" method="POST">
+                <li color="black ; font-weight: bold;">
+                    <button type="submit">Consultation des voitures</button>
+                </li>
+            </form>
+            <c:if test="${user == 'Administrator'}">
+                <form action="/add-car" method="POST">
+                    <li color="black ; font-weight: bold;">
+                        <button type="submit">Ajouter des Voitures</button>
+                    </li>
+                </form>
             </c:if>
-            <c:if test = "${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
-                <li color ="black ; font-weight: bold;"><a href="/history">Historique</a></li>
+            <c:if test="${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
+                <form action="/history" method="POST">
+                    <li color="black ; font-weight: bold;">
+                        <button type="submit">Historique</button>
+                    </li>
+                </form>
             </c:if>
-            <li color ="black ; font-weight: bold;"><a href="/contact">Contact</a></li>
+            <form action="/contact" method="POST">
+                <li color="black ; font-weight: bold;">
+                    <button type="submit">Contact</button>
+                </li>
+            </form>
         </ul>
     </div>
     <c:choose>
-        <c:when test = "${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
+        <c:when test="${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
             <form action="/logout" method="POST">
                 <button class="button" type="submit">Se déconnecter</button>
             </form>
         </c:when>
         <c:otherwise>
             <form action="/login" method="POST">
-                <button class="button" type="submit"style="color : black">Se connecter</button>
+                <button class="button" type="submit" style="color : black">Se connecter</button>
             </form>
         </c:otherwise>
     </c:choose>

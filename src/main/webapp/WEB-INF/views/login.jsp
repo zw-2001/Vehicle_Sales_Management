@@ -6,13 +6,14 @@
 <head>
     <meta charset="utf-8">
     <title>Cupcake</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/resources/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/resources/css/style.css"/>
 </head>
 
 <body class="body-connexion">
 <div class="section-background section-background-color">
-    <jsp:include page="/WEB-INF/fragments/navbar.jsp" />
+    <jsp:include page="/WEB-INF/fragments/navbar.jsp"/>
     <div class="cadre">
         <div class="txt animated pulse connexion-content">
             <div class="connexion-left-content">
@@ -28,19 +29,21 @@
                             <form action="login-check" method="POST" class="connexion-form">
                                 <table class="input-fields">
                                     <tr>
-                                        <td>E-mail : </td>
-                                        <td> <input class="input" type="email" placeholder="exemple@gmail.com"
-                                                    name="email" /> </td>
+                                        <td>E-mail :</td>
+                                        <td><input class="input" type="email" placeholder="exemple@gmail.com"
+                                                   name="email"/></td>
                                     </tr>
                                     <tr>
-                                        <td>Mot de passe : </td>
-                                        <td> <input class="input" type="password" placeholder="Mot de passe"
-                                                    name="password" /> </td>
+                                        <td>Mot de passe :</td>
+                                        <td><input class="input" type="password" placeholder="Mot de passe"
+                                                   name="password"/></td>
                                     </tr>
-
                                     <tr>
-                                        <td><button type="submit"
-                                                    class="btn btn-connexion btn-outline-dark">Connecter</button></td>
+                                        <td>
+                                            <button type="submit"
+                                                    class="btn btn-connexion btn-outline-dark">Connecter
+                                            </button>
+                                        </td>
                                     </tr>
                                 </table>
                                 <a href="/signup" style="color : white"> Pas encore inscrit ? </a>

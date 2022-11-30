@@ -6,22 +6,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Cupcake</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8.4.4/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/resources/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8.4.4/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/resources/css/style.css"/>
 </head>
 
 <body>
 <header>
     <div class="background-image-container bg-index">
         <div class="background-image-overlay"></div>
-        <jsp:include page="/WEB-INF/fragments/navbar.jsp" />
+        <jsp:include page="/WEB-INF/fragments/navbar.jsp"/>
         <div class="cadre">
             <div class="txt animated pulse ">
-                <h1 style ="color : white">Louez plus qu'une voiture</h1>
-                <p style ="color : white">Le pouvoir de rouler moins cher</p>
+                <h1 style="color : white">Louez plus qu'une voiture</h1>
+                <p style="color : white">Le pouvoir de rouler moins cher</p>
                 <div class="box-1">
-                    <a href="login" >
+                    <a href="login">
                         <div class="btn btn-one">
                             <span>Commencez à louer</span>
                         </div>
@@ -35,14 +36,16 @@
 <div class=" content" style="padding-top :50px">
     <div class="jumbotron jumbotron-fluid">
         <div class="row">
-            <div class="col-md box" style="background-image:url(https://cdn.shopify.com/s/files/1/0068/6289/7199/files/banner-v1-1.jpg?v=1564546967)">
+            <div class="col-md box"
+                 style="background-image:url(https://cdn.shopify.com/s/files/1/0068/6289/7199/files/banner-v1-1.jpg?v=1564546967)">
 
                 <h3>Nos partenaires</h3>
                 <a href="https://www.lacentrale.fr/">
                     <button type="button" class="btn btn-outline-primary" style="margin-top:20px">Voir</button>
                 </a>
             </div>
-            <div class="col-md box"style="background-image:url(https://cdn.shopify.com/s/files/1/0068/6289/7199/files/banner-v1-2.jpg?v=1564546976)">
+            <div class="col-md box"
+                 style="background-image:url(https://cdn.shopify.com/s/files/1/0068/6289/7199/files/banner-v1-2.jpg?v=1564546976)">
 
                 <h3>Nos partenaires</h3>
                 <a href="https://www.occasionsdulion.com/">
@@ -76,12 +79,18 @@
     </div>
 </div>
 
-<jsp:include page="/WEB-INF/fragments/footer.jsp" />
+<jsp:include page="/WEB-INF/fragments/footer.jsp"/>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@8.4.4/swiper-bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
 <script>
@@ -97,7 +106,7 @@
             modifier: 1,
             slideShadows: true,
         },
-        loop:true,
+        loop: true,
     });
 </script>
 </body>

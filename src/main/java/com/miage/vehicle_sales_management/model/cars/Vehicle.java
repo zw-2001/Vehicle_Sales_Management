@@ -1,6 +1,7 @@
 package com.miage.vehicle_sales_management.model.cars;
 
 
+import java.util.Date;
 import java.text.DecimalFormat;
 
 public class Vehicle {
@@ -13,9 +14,11 @@ public class Vehicle {
     private String gearbox;
     private String seat;
     private String image;
+    private int stock;
+    private Date acquisitionDate;
     private float discount;
 
-    public Vehicle (int id, String vehicle, String type, String brand, float price, String energy, String gearBox, String seat, String image) {
+    public Vehicle(int id, String vehicle, String type, String brand, float price, String energy, String gearBox, String seat, String image, int stock, Date acquisitionDate) {
         this.id = id;
         this.vehicle = vehicle;
         this.type = type;
@@ -25,12 +28,15 @@ public class Vehicle {
         this.gearbox = gearBox;
         this.seat = seat;
         this.image = image;
+        this.stock = stock;
+        this.acquisitionDate = acquisitionDate;
         this.discount = 0;
     }
 
     public int getId() {
         return id;
     }
+
     public String getVehicle() {
         return vehicle;
     }
@@ -66,5 +72,9 @@ public class Vehicle {
 
     public String getImage() {
         return image;
+    }
+
+    public int getStock() {
+        return stock;
     }
 }

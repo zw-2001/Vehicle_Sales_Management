@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 
 public class UserDao {
     private Connection con = ConnectionManager.getConnection();
+
     public int loginUser(String email, String password) {
         String sql = "SELECT * FROM User WHERE Email = ? AND Password = ?";
         if (con != null) {
@@ -25,28 +26,30 @@ public class UserDao {
                     user.setLastName(rs.getString("LastName"));
                     user.setFirstName(rs.getString("FirstName"));
                 }
-                return 1;
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            return 1;
         }
         return 0;
     }
-    public int registerUser(String email, String password, String lastName, String firstName) {
-        String sql = "INSERT INTO Users (Email, Password, LastName, FirstName) VALUES (?, ?, ?, ?)";
+
+    public int signupUser(String type, String email, String password, String lastName, String firstName) {
+        String sql = "INSERT INTO User (Type, Email, Password, LastName, FirstName) VALUES (?, ?, ?, ?, ?)";
 
         if (con != null) {
             try {
                 PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, email);
-                ps.setString(2, password);
-                ps.setString(3, lastName);
-                ps.setString(4, firstName);
+                ps.setString(1, type);
+                ps.setString(2, email);
+                ps.setString(3, password);
+                ps.setString(4, lastName);
+                ps.setString(5, firstName);
                 ps.executeUpdate();
-                return 1;
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            return 1;
         }
         return 0;
     }

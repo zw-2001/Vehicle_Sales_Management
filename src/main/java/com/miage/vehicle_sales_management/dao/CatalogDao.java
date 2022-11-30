@@ -8,11 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class CatalogDao {
-
     private Connection con = ConnectionManager.getConnection();
 
     public int showCatalog() {
-        String sql = "SELECT * FROM Vehicle";
+        String sql = "SELECT Vehicle.Id_Vehicle AS Id_Vehicle, Vehicle, Type, Brand, Vehicle.Price AS Price, Energy, Gearbox, Seat, Image, SUM(Quantity) AS Stock, MIN(AcquisitionDate) AS AcquisitionDate\n" +
+                "FROM Vehicle, Stock\n" +
+                "WHERE Vehicle.Id_Vehicle = Stock.Id_Vehicle\n" +
+                "AND Stock.Quantity > 0\n" +
+                "GROUP BY Vehicle.Id_Vehicle;";
         if (con != null) {
             try {
                 PreparedStatement ps = con.prepareStatement(sql);
@@ -29,10 +32,27 @@ public class CatalogDao {
                             rs.getString("Energy"),
                             rs.getString("Gearbox"),
                             rs.getString("Seat"),
-                            rs.getString("Image")
+                            rs.getString("Image"),
+                            rs.getInt("Stock"),
+                            rs.getDate("AcquisitionDate")
                     );
                     catalog.addVehicle(vehicle);
                 }
+                return 1;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public int addCar() {
+        String sql = "INSERT INTO Vehicle (Type, Brand, Price, Energy, Gearbox, Seat, Image) VALUES (?, ?, ?, ?, ?, ?, ?); " +
+                "INSERT INTO Stock (Id_Vehicle, Quantity, AcquisitionDate) VALUES (LAST_INSERT_ID(), ?, ?);";
+        if (con != null) {
+            try {
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.executeUpdate();
                 return 1;
             } catch (Exception e) {
                 e.printStackTrace();
