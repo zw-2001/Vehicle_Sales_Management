@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 public class UserDao {
     private Connection con = ConnectionManager.getConnection();
 
-    public int loginUser(String email, String password) {
+    public int loginUser(String email, String password, User user) {
         String sql = "SELECT * FROM User WHERE Email = ? AND Password = ?";
         if (con != null) {
             try {
@@ -19,17 +19,15 @@ public class UserDao {
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    User user = User.getInstance();
                     user.setType(rs.getString("Type"));
                     user.setEmail(rs.getString("Email"));
-                    user.setPassword(rs.getString("Password"));
                     user.setLastName(rs.getString("LastName"));
                     user.setFirstName(rs.getString("FirstName"));
+                    return 1;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return 1;
         }
         return 0;
     }

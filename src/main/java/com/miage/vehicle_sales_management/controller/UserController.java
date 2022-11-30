@@ -13,10 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @SessionAttributes("user")
 public class UserController {
-    User user = User.getInstance();
 
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView login(ModelAndView mv) {
+        User user = User.getInstance();
         mv.addObject("user", user.getType());
         mv.setViewName("login");
         return mv;
@@ -24,7 +24,8 @@ public class UserController {
 
     @RequestMapping(value = "/login-check", method = RequestMethod.POST)
     public ModelAndView userLoginCheck(@RequestParam("email") String email, @RequestParam("password") String password, ModelAndView mv) {
-        int login = new UserDao().loginUser(email, password);
+        User user = User.getInstance();
+        int login = new UserDao().loginUser(email, password, user);
 
         if (login != 0) {
             mv.addObject("user", user.getType());
@@ -36,8 +37,9 @@ public class UserController {
         return mv;
     }
 
-    @RequestMapping(value = "/signup")
+    @RequestMapping(value = "/signup", method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView signup(ModelAndView mv) {
+        User user = User.getInstance();
         mv.addObject("user", user.getType());
         mv.setViewName("signup");
         return mv;
@@ -45,6 +47,7 @@ public class UserController {
 
     @RequestMapping(value = "/signup-check", method = RequestMethod.POST)
     public ModelAndView userSignupCheck(@RequestParam("lastName") String lastName, @RequestParam("firstName") String firstName, @RequestParam("type") String type, @RequestParam("email") String email, @RequestParam("password") String password, ModelAndView mv) {
+        User user = User.getInstance();
 
         int signup = new UserDao().signupUser(type, email, password, lastName, firstName);
 
@@ -59,10 +62,9 @@ public class UserController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public ModelAndView logout(ModelAndView mv, SessionStatus status) {
-        User user = User.getInstance();
+        User.getInstance().logout();
         status.setComplete();
-        user.logout();
-        mv.addObject("user", user.getType());
+        mv.addObject("user", User.getInstance().getType());
         mv.setViewName("index");
         return mv;
     }

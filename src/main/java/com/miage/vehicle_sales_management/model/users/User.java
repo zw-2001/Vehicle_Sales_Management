@@ -18,21 +18,19 @@ public class User {
      *
      * @param type
      * @param email
-     * @param password
      * @param firstName
      * @param lastName
      */
-    private User(String type, String email, String password, String firstName, String lastName) {
+    private User(String type, String email, String firstName, String lastName) {
         this.type = type;
         this.email = email;
-        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
     public static User getInstance() {
         if (instance == null) {
-            instance = new User("General", "", "", "", "");
+            instance = new User("General", "", "", "");
         }
         return instance;
     }

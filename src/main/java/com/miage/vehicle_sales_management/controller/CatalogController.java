@@ -13,10 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @SessionAttributes("user")
 public class CatalogController {
-    User user = User.getInstance();
 
-    @RequestMapping(value = "/catalog")
+    @RequestMapping(value = "/catalog", method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView catalog(ModelAndView mv) {
+        User user = User.getInstance();
         mv.addObject("user", user.getType());
         int catalog = new CatalogDao().showCatalog();
         if (catalog != 0) {
@@ -31,6 +31,7 @@ public class CatalogController {
     // TODO
     @RequestMapping(value = "/management", method = RequestMethod.POST)
     public ModelAndView management(ModelAndView mv, @RequestParam("action") String action) {
+        User user = User.getInstance();
         // Appel DAO pour management et String sql avec if en fonction de action
         System.out.println(action);
         mv.addObject("user", user.getType());
