@@ -14,7 +14,7 @@
 <header>
     <div class="background-image-container bg-contact">
         <div class="background-image-overlay"></div>
-        <jsp:include page="/WEB-INF/fragments/navbar/${navbar}.jsp" />
+        <jsp:include page="/WEB-INF/fragments/navbar.jsp" />
         <div class="cadre">
             <div class="txt animated pulse ">
                 <h1 style ="color : white">Louez plus qu'une voiture</h1>
@@ -75,7 +75,7 @@
     </div>
 </div>
 
-<jsp:include page="/WEB-INF/fragments/footer/footer.jsp" />
+<jsp:include page="/WEB-INF/fragments/footer.jsp" />
 
 </body>
 <html>

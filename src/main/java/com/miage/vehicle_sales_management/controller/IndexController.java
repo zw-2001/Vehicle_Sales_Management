@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@SessionAttributes("navbar")
+@SessionAttributes("user")
 public class IndexController {
-
+    User user = User.getInstance();
     @RequestMapping(value = "/")
     public ModelAndView index(ModelAndView mv) {
-        User user = User.getInstance();
-        mv.addObject("navbar", user.getType().toLowerCase());
+        mv.addObject("user", user.getType());
         mv.setViewName("index");
         return mv;
     }

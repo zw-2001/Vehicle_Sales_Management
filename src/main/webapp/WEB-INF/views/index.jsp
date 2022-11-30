@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Cupcake</title>
@@ -13,7 +15,7 @@
 <header>
     <div class="background-image-container bg-index">
         <div class="background-image-overlay"></div>
-        <jsp:include page="/WEB-INF/fragments/navbar/${navbar}.jsp" />
+        <jsp:include page="/WEB-INF/fragments/navbar.jsp" />
         <div class="cadre">
             <div class="txt animated pulse ">
                 <h1 style ="color : white">Louez plus qu'une voiture</h1>
@@ -55,26 +57,26 @@
             <h1>Nos voitures</h1>
         </div>
         <div class="swiper-wrapper">
-            <div class="swiper-slide" style="background-image:url(/resources/images/cars/png/Range_Rover.png)">
+            <div class="swiper-slide" style="background-image:url(/resources/images/cars/carousel/Range_Rover.png)">
                 <div class="carousel-title-car">Range Rover</div>
             </div>
-            <div class="swiper-slide" style="background-image:url(/resources/images/cars/png/Mercedes.png)">
+            <div class="swiper-slide" style="background-image:url(/resources/images/cars/carousel/Mercedes.png)">
                 <div class="carousel-title-car">Mercedes-Benz</div>
             </div>
-            <div class="swiper-slide" style="background-image:url(/resources/images/cars/png/Mini.png)">
+            <div class="swiper-slide" style="background-image:url(/resources/images/cars/carousel/Mini.png)">
                 <div class="carousel-title-car">Mini</div>
             </div>
-            <div class="swiper-slide" style="background-image:url(/resources/images/cars/png/Renault.png)">
+            <div class="swiper-slide" style="background-image:url(/resources/images/cars/carousel/Renault.png)">
                 <div class="carousel-title-car">Renault</div>
             </div>
-            <div class="swiper-slide" style="background-image:url(/resources/images/cars/png/Tesla.png)">
+            <div class="swiper-slide" style="background-image:url(/resources/images/cars/carousel/Tesla.png)">
                 <div class="carousel-title-car">Tesla</div>
             </div>
         </div>
     </div>
 </div>
 
-<jsp:include page="/WEB-INF/fragments/footer/footer.jsp" />
+<jsp:include page="/WEB-INF/fragments/footer.jsp" />
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@8.4.4/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

@@ -1,10 +1,70 @@
 package com.miage.vehicle_sales_management.model.cars;
 
-public abstract class Vehicle {
-    private String brand;
-    private String model;
-    private String color;
+
+import java.text.DecimalFormat;
+
+public class Vehicle {
+    private int id;
+    private String vehicle;
     private String type;
-    private int year;
-    private String registrationNumber;
+    private String brand;
+    private float price;
+    private String energy;
+    private String gearbox;
+    private String seat;
+    private String image;
+    private float discount;
+
+    public Vehicle (int id, String vehicle, String type, String brand, float price, String energy, String gearBox, String seat, String image) {
+        this.id = id;
+        this.vehicle = vehicle;
+        this.type = type;
+        this.brand = brand;
+        this.price = price;
+        this.energy = energy;
+        this.gearbox = gearBox;
+        this.seat = seat;
+        this.image = image;
+        this.discount = 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+    public String getVehicle() {
+        return vehicle;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public Object getPrice() {
+        if (price % 1 == 0) {
+            return (int) price;
+        } else {
+            DecimalFormat df = new DecimalFormat("#.00");
+            return df.format(price);
+        }
+    }
+
+    public String getEnergy() {
+        return energy;
+    }
+
+    public String getGearbox() {
+        return gearbox;
+    }
+
+    public String getSeat() {
+        return seat;
+    }
+
+    public String getImage() {
+        return image;
+    }
 }

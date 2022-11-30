@@ -24,8 +24,8 @@ public class UserDao {
                     user.setPassword(rs.getString("Password"));
                     user.setLastName(rs.getString("LastName"));
                     user.setFirstName(rs.getString("FirstName"));
-                    return 1;
                 }
+                return 1;
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -15,7 +15,7 @@
 <header>
     <div class="background-image-container bg-location">
         <div class="background-image-overlay"></div>
-        <jsp:include page="/WEB-INF/fragments/navbar/${navbar}.jsp" />
+        <jsp:include page="/WEB-INF/fragments/navbar.jsp" />
         <div class="cadre">
             <div class="txt animated pulse ">
                 <h1 style ="color : white">Louez plus qu'une voiture</h1>
@@ -26,49 +26,48 @@
     </div>
 </header>
 
-<div class=" content location-content" style="padding-top :50px">
-<%--    <c:forEach items="${locations}" var="location">
-        <div class="card" style="width: 18rem;">
-            <img src="${location.image}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">${location.name}</h5>
-                <p class="card-text">${location.description}</p>
-                <a href="/location/${location.id}" class="btn btn-primary">Voir plus</a>
+<div class="content" style="padding-top :50px">
+    <c:forEach var="vehicle" items="${vehicles}">
+        <div class = "container">
+            <div class = " box boxL">
+                <img src = "/resources/images/cars/catalog/${vehicle.getImage()}"/>
             </div>
-        </div>--%>
-    <%--<?php
-                $vehicules = $_SESSION['Vehicules'];
 
-                foreach ($vehicules as $vehicule) {
-                    echo '<div class = "container">',
+            <div class = " box boxR">
+                <div class ="boxR-prix">
+                    <p class="prix-bloc"> ${vehicle.getPrice()} euros</p>
+                </div>
 
-    '<div class = " box boxL">',
-    "<img src = View/Design/images/", $vehicule['Photo'] . "  > ",
-    '</div>',
+                <table>
+                    <tr>
+                        <c:set var = "user" scope = "session" value = "${user}"/>
+                        <th> Véhicule </th>
+                        <th> Type </th>
+                        <th> Marque </th>
+                        <th> Énergie </th>
+                        <th> Boîte de vitesse </th>
+                        <c:if test = "${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
+                            <th> Ajouter </th>
+                        </c:if>
+                    </tr>
+                    <tr>
+                        <td>${vehicle.getVehicle()}</td>
+                        <td>${vehicle.getType()}</td>
+                        <td> ${vehicle.getBrand()}</td>
+                        <td> ${vehicle.getEnergy()}</td>
+                        <td> ${vehicle.getGearbox()}</td>
+                        <c:if test = "${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
+                            <td> <input type="checkbox" value="${vehicle.getId()}" name="checkbox[]"> </td>
+                        </c:if>
 
-    '<div class = " box boxR">',
-
-    '<div class ="boxR-prix">',
-        '<p class="prix-bloc"> '. $vehicule['Prix'] . " euros/jour" .'</p>',
-        '</div>',
-
-    '<table>',
-        '<tr><th> Modèle </th> <th> Caracteristiques </th></tr>',
-        '<tr>',
-            '<td>' . $vehicule['Type'] . '</td>',
-            '<td>' . $vehicule['Caracteristiques'] . '</td>',
-
-            '</tr>',
-        '</table>',
-    '</div>',
-
-    '</div>';
-}
-
-?>--%>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </c:forEach>
 </div>
 
-<jsp:include page="/WEB-INF/fragments/footer/footer.jsp" />
+<jsp:include page="/WEB-INF/fragments/footer.jsp" />
 
 </body>
 </html>
