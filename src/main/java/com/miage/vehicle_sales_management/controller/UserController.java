@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes("user")
 public class UserController {
 
-    @RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView login(ModelAndView mv) {
         User user = User.getInstance();
         mv.addObject("user", user.getType());
@@ -23,21 +23,21 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login-check", method = RequestMethod.POST)
-    public ModelAndView userLoginCheck(@RequestParam("email") String email, @RequestParam("password") String password, ModelAndView mv) {
+    public ModelAndView loginCheck(@RequestParam("email") String email, @RequestParam("password") String password, ModelAndView mv) {
         User user = User.getInstance();
-        int login = new UserDao().loginUser(email, password, user);
+        int login = new UserDao().loginUser(email, password);
 
         if (login != 0) {
             mv.addObject("user", user.getType());
-            mv.addObject("msg", "Bonjour " + user.getFirstName() + " !");
+            mv.setViewName("redirect:/catalog");
         } else {
             mv.addObject("msg", "Email ou mot de passe invalide. Veuillez réessayer.");
+            mv.setViewName("login");
         }
-        mv.setViewName("login");
         return mv;
     }
 
-    @RequestMapping(value = "/signup", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "/signup", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView signup(ModelAndView mv) {
         User user = User.getInstance();
         mv.addObject("user", user.getType());
@@ -46,17 +46,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/signup-check", method = RequestMethod.POST)
-    public ModelAndView userSignupCheck(@RequestParam("lastName") String lastName, @RequestParam("firstName") String firstName, @RequestParam("type") String type, @RequestParam("email") String email, @RequestParam("password") String password, ModelAndView mv) {
-        User user = User.getInstance();
-
+    public ModelAndView signupCheck(@RequestParam("lastName") String lastName, @RequestParam("firstName") String firstName, @RequestParam("type") String type, @RequestParam("email") String email, @RequestParam("password") String password, ModelAndView mv) {
         int signup = new UserDao().signupUser(type, email, password, lastName, firstName);
 
         if (signup != 0) {
-            mv.addObject("msg", "Bienvenue " + user.getFirstName() + ", votre compte a bien été crée.");
+            mv.addObject("user", User.getInstance().getType());
+            mv.setViewName("redirect:/catalog");
         } else {
-            mv.addObject("msg", "Invalid email or password.");
+            mv.addObject("msg", "Un compte associé à cette adresse email existe déjà.");
+            mv.setViewName("signup");
         }
-        mv.setViewName("signup");
         return mv;
     }
 
