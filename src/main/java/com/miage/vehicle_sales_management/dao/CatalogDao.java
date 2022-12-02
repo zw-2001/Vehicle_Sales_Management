@@ -45,19 +45,4 @@ public class CatalogDao {
         }
         return 0;
     }
-
-    public int addCar() {
-        String sql = "INSERT INTO Vehicle (Type, Brand, Price, Energy, Gearbox, Seat, Image) VALUES (?, ?, ?, ?, ?, ?, ?); " +
-                "INSERT INTO Stock (Id_Vehicle, Quantity, AcquisitionDate) VALUES (LAST_INSERT_ID(), ?, ?);";
-        if (con != null) {
-            try {
-                PreparedStatement ps = con.prepareStatement(sql);
-                ps.executeUpdate();
-                return 1;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return 0;
-    }
 }

@@ -14,6 +14,6 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     <error-page>
-        <location>/errors</location>
+        <location>/WEB-INF/views/errors.jsp</location>
     </error-page>
 </web-app>

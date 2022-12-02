@@ -30,24 +30,42 @@
     <section>
         <div clas="wrapper">
             <form action="/add-car-check" method="POST" class="ajoutervoiture-form">
-                <center style="font-weight: bold ; "><br>Ajouter une voiture en location</center>
+                <center style="font-weight: bold;"><br>Ajouter une voiture en location</center>
                 <div class="input-fieldscar addcar">
+                    <label>Véhicule : </label>
+                    <input type="radio" name="vehicle" value="Car" required/><label>Voiture</label>
+                    <input type="radio" name="vehicle" value="Scooter"/><label>Scooter</label></td>
+                    <input type="radio" name="vehicle" value="Truck"/><label>Camion</label></td>
+
                     <label>Type : </label>
-                    <input class=" champ" type="text" placeholder="Votre type" name="type" required/>
+                    <input class="champ" type="text" placeholder="Type du véhicule" name="Type" required/>
 
-                    <label>Prix/Jour : </label>
-                    <input class=" champ" type="text" placeholder="Le prix" name="prix" required/>
+                    <label>Marque : </label>
+                    <input class="champ" type="text" placeholder="Marque du véhicule" name="Trand" required/>
 
-                    <label>Caractéristiques : </label>
-                    <input class=" champ" type="text" placeholder="Caracteristique de voiture" name="caracteristique"
-                           required/>
+                    <label>Prix : </label>
+                    <input class="champ" type="text" placeholder="Prix du véhicule" name="Price" required/>
+
+                    <label>Énergie : </label>
+                    <input type="radio" name="Energy" value="Gasoline" required/><label>Diesel</label>
+                    <input type="radio" name="Energy" value="Electric"/><label>Électrique</label></td>
+                    <input type="radio" name="Energy" value="Hybrid"/><label>Hybride</label></td>
+                    <input type="radio" name="Energy" value="Diesel"/><label>Diesel</label></td>
+
+                    <label>Boîte de vitesses : </label>
+                    <input class="champ" type="text" placeholder="Boîte de vitesses du véhicule" name="Gearbox" required/>
+
+                    <label>Nombre de siège : </label>
+                    <input class="champ" type="number" placeholder="Nombre de siège du véhicule" name="Seat" required/>
 
                     <label>Nom de la photo : </label>
-                    <input class=" champ" type="text" placeholder="Photo de voiture" name="photo" required/>
+                    <input class="champ" type="text" placeholder="Photo de voiture" name="photo" required/>
                 </div>
 
                 <div>${msg}</div>
 
+                <%-- TODO : Ajouter un champ pour l'upload de la photo --%>
+                <%--
                 <div id="file-upload-form" class="uploader" style="margin-bottom:50px">
                     <input id="file-upload" type="file" name="fileUpload" accept="image/*"/>
 
@@ -67,6 +85,7 @@
                         </div>
                     </label>
                 </div>
+--%>
                 <button type="submit" class="btn btn-outline-warning" style="float : right; margin: 50px 50px 50px 0px">
                     Poster
                 </button>
@@ -76,6 +95,5 @@
 </div>
 <jsp:include page="/WEB-INF/fragments/footer.jsp"/>
 
-<script src="js/upload.js"></script>
 </body>
 </html>
