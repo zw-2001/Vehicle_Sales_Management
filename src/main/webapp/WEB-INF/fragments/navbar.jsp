@@ -14,13 +14,13 @@
             <c:set var="user" scope="session" value="${user}"/>
             <form action="/catalog" method="POST">
                 <li color="black ; font-weight: bold;">
-                    <button type="submit">Consultation des voitures</button>
+                    <button type="submit">Consultation du catalogue</button>
                 </li>
             </form>
             <c:if test="${user == 'Administrator'}">
                 <form action="/add-car" method="POST">
                     <li color="black ; font-weight: bold;">
-                        <button type="submit">Ajouter des Voitures</button>
+                        <button type="submit">Ajouter des voitures</button>
                     </li>
                 </form>
             </c:if>

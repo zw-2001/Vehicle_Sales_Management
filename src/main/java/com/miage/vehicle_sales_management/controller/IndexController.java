@@ -11,16 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes("user")
 public class IndexController {
 
-    @RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView index(ModelAndView mv) {
         User user = User.getInstance();
         mv.addObject("user", user.getType());
-        mv.setViewName("index");
-        return mv;
-    }
-
-    @RequestMapping(value = "/errors", method = { RequestMethod.GET, RequestMethod.POST })
-    public ModelAndView renderErrorPage(ModelAndView mv) {
         mv.setViewName("index");
         return mv;
     }

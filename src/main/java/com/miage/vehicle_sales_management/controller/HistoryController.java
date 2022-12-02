@@ -13,8 +13,6 @@ public class HistoryController {
 
     @RequestMapping(value = "/history", method = RequestMethod.POST)
     public ModelAndView history(ModelAndView mv) {
-        User user = User.getInstance();
-        mv.addObject("user", user.getType());
         mv.setViewName("history");
         return mv;
     }

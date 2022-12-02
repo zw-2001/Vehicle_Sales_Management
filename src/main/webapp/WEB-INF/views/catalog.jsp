@@ -18,7 +18,7 @@
         <div class="background-image-overlay"></div>
         <jsp:include page="/WEB-INF/fragments/navbar.jsp"/>
         <div class="cadre">
-            <div class="txt animated pulse ">
+            <div class="txt animated pulse">
                 <h1 style="color : white">Louez plus qu'une voiture</h1>
                 <p style="color : white">Le pouvoir de rouler moins cher </p>
             </div>

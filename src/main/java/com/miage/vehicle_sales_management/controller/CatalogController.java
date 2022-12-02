@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes("user")
 public class CatalogController {
 
-    @RequestMapping(value = "/catalog", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "/catalog", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView catalog(ModelAndView mv) {
         User user = User.getInstance();
         mv.addObject("user", user.getType());

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes("user")
 public class ContactController {
 
-    @RequestMapping(value = "/contact", method = { RequestMethod.GET, RequestMethod.POST })
+    @RequestMapping(value = "/contact", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView contact(ModelAndView mv) {
         User user = User.getInstance();
         mv.addObject("user", user.getType());

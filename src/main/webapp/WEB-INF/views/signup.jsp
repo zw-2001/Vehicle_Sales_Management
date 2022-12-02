@@ -27,20 +27,20 @@
                             <form action="/signup-check" method="POST" class="connexion-form">
                                 <table class="input-fields">
                                     <tr>
-                                        <td>Nom :</td>
-                                        <td><input class="input" type="text" placeholder="Votre nom" name="lastName"
-                                                   required/></td>
-                                    </tr>
-                                    <tr>
                                         <td>Prénom :</td>
                                         <td><input class="input" type="text" placeholder="Votre prénom" name="firstName"
                                                    required/></td>
                                     </tr>
                                     <tr>
+                                        <td>Nom :</td>
+                                        <td><input class="input" type="text" placeholder="Votre nom" name="lastName"
+                                                   required/></td>
+                                    </tr>
+                                    <tr>
                                         <td>Type de compte :</td>
                                         <td><input type="radio" name="type"
-                                                   value="Company"/><label>Entreprise</label>
-                                            <input class="input" type="radio" name="type" value="Individual"
+                                                   value="Company" required/><label>Entreprise</label>
+                                            <input type="radio" name="type" value="Individual"
                                                    style="margin-left: 30px;"/><label>Particulier</label></td>
                                     </tr>
                                     <tr>
