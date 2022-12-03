@@ -32,37 +32,44 @@
             <form action="/add-car-check" method="POST" class="ajoutervoiture-form">
                 <center style="font-weight: bold;"><br>Ajouter une voiture en location</center>
                 <div class="input-fieldscar addcar">
-                    <label>Véhicule : </label>
-                    <input type="radio" name="vehicle" value="Car" required/><label>Voiture</label>
-                    <input type="radio" name="vehicle" value="Scooter"/><label>Scooter</label></td>
-                    <input type="radio" name="vehicle" value="Truck"/><label>Camion</label></td>
+                    <label>Véhicule : </label><br>
+                    <input type="radio" name="Vehicle" value="Car" required/><label style="margin-right: 25px; margin-bottom: 20px;">Voiture</label>
+                    <input type="radio" name="Vehicle" value="Scooter"/><label style="margin-right: 25px; margin-bottom: 20px;">Scooter</label></td>
+                    <input type="radio" name="Vehicle" value="Truck"/><label style="margin-right: 25px; margin-bottom: 20px;">Camion</label></td><br>
 
                     <label>Type : </label>
                     <input class="champ" type="text" placeholder="Type du véhicule" name="Type" required/>
 
                     <label>Marque : </label>
-                    <input class="champ" type="text" placeholder="Marque du véhicule" name="Trand" required/>
+                    <input class="champ" type="text" placeholder="Marque du véhicule" name="Brand" required/>
 
                     <label>Prix : </label>
                     <input class="champ" type="text" placeholder="Prix du véhicule" name="Price" required/>
 
-                    <label>Énergie : </label>
-                    <input type="radio" name="Energy" value="Gasoline" required/><label>Diesel</label>
-                    <input type="radio" name="Energy" value="Electric"/><label>Électrique</label></td>
-                    <input type="radio" name="Energy" value="Hybrid"/><label>Hybride</label></td>
-                    <input type="radio" name="Energy" value="Diesel"/><label>Diesel</label></td>
+                    <label>Énergie : </label><br>
+                    <input type="radio" name="Energy" value="Gasoline" required/><label style="margin-right: 25px; margin-bottom: 20px;">Essence</label>
+                    <input type="radio" name="Energy" value="Electric"/><label style="margin-right: 25px; margin-bottom: 20px;">Électrique</label></td>
+                    <input type="radio" name="Energy" value="Hybrid"/><label style="margin-right: 25px; margin-bottom: 20px;">Hybride</label></td>
+                    <input type="radio" name="Energy" value="Diesel"/><label style="margin-right: 25px; margin-bottom: 20px;">Diesel</label></td>
 
-                    <label>Boîte de vitesses : </label>
-                    <input class="champ" type="text" placeholder="Boîte de vitesses du véhicule" name="Gearbox" required/>
+                    <label>Boîte de vitesses : </label><br>
+                    <input type="radio" name="Gearbox" value="Manual" required/><label style="margin-right: 25px; margin-bottom: 20px;">Manuel</label>
+                    <input type="radio" name="Gearbox" value="Automatic"/><label style="margin-right: 25px; margin-bottom: 20px;">Automatique</label></td><br>
 
                     <label>Nombre de siège : </label>
-                    <input class="champ" type="number" placeholder="Nombre de siège du véhicule" name="Seat" required/>
+                    <input class="champ" type="number" placeholder="Nombre de siège du véhicule" name="Seat" min="0" value="2" required/>
 
                     <label>Nom de la photo : </label>
-                    <input class="champ" type="text" placeholder="Photo de voiture" name="photo" required/>
+                    <input class="champ" type="text" placeholder="Nom de l'image du véhicule" name="Image" required/>
+
+                    <label>Quantité : </label>
+                    <input class="champ" type="number" placeholder="Quantité du véhicule" name="Quantity" min="0" value="0" required/>
+
+                    <label>Date d'acquisition : </label>
+                    <input class="champ" type="date" placeholder="Date d'acquisition du véhicule" name="AcquisitionDate" required/>
                 </div>
 
-                <div>${msg}</div>
+                <div style="text-align: center; padding-bottom: 20px">${msg}</div>
 
                 <%-- TODO : Ajouter un champ pour l'upload de la photo --%>
                 <%--

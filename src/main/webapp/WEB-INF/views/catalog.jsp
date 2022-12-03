@@ -49,7 +49,7 @@
                             <th> Énergie</th>
                             <th> Boîte de vitesse</th>
                             <c:if test="${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
-                                <th> Stock</th>
+                                <th> Quantité</th>
                                 <th> Ajouter</th>
                             </c:if>
                         </tr>
@@ -60,7 +60,7 @@
                             <td> ${vehicle.getEnergy()}</td>
                             <td> ${vehicle.getGearbox()}</td>
                             <c:if test="${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
-                                <td> ${vehicle.getStock()}</td>
+                                <td> ${vehicle.getQuantity()}</td>
                                 <td><input type="checkbox" value="${vehicle.getId()}" name="checkbox[]"></td>
                             </c:if>
                         </tr>
