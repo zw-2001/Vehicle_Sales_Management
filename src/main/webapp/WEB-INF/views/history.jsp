@@ -19,7 +19,7 @@
         <jsp:include page="/WEB-INF/fragments/navbar.jsp"/>
         <div class="cadre">
             <div class="txt animated pulse ">
-                <h1 style="color : black">Louez plus qu'une voiture</h1>
+                <h1 style="color : black">Achetez plus qu'une voiture</h1>
                 <p style="color : black">Le pouvoir de rouler moins cher </p>
             </div>
         </div>
