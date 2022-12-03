@@ -23,7 +23,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login-check", method = RequestMethod.POST)
-    public ModelAndView loginCheck(@RequestParam("email") String email, @RequestParam("password") String password, ModelAndView mv) {
+    public ModelAndView loginCheck(@RequestParam("email") String email, @RequestParam("password") String password,
+                                   ModelAndView mv) {
         User user = User.getInstance();
         int login = new UserDao().loginUser(email, password);
 
@@ -46,7 +47,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/signup-check", method = RequestMethod.POST)
-    public ModelAndView signupCheck(@RequestParam("lastName") String lastName, @RequestParam("firstName") String firstName, @RequestParam("type") String type, @RequestParam("email") String email, @RequestParam("password") String password, ModelAndView mv) {
+    public ModelAndView signupCheck(@RequestParam("lastName") String lastName, @RequestParam("firstName") String firstName,
+                                    @RequestParam("type") String type, @RequestParam("email") String email,
+                                    @RequestParam("password") String password, ModelAndView mv) {
         int signup = new UserDao().signupUser(type, email, password, lastName, firstName);
 
         if (signup != 0) {

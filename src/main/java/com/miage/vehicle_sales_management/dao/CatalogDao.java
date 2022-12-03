@@ -11,10 +11,11 @@ public class CatalogDao {
     private Connection con = ConnectionManager.getConnection();
 
     public int showCatalog() {
-        String sql = "SELECT Vehicle.Id_Vehicle AS Id_Vehicle, Vehicle, Type, Brand, Vehicle.Price AS Price, Energy, Gearbox, Seat, Image, SUM(Quantity) AS Stock, MIN(AcquisitionDate) AS AcquisitionDate\n" +
-                "FROM Vehicle, Stock\n" +
-                "WHERE Vehicle.Id_Vehicle = Stock.Id_Vehicle\n" +
-                "AND Stock.Quantity > 0\n" +
+        String sql = "SELECT Vehicle.Id_Vehicle AS Id_Vehicle, Vehicle, Type, Brand, Vehicle.Price AS Price, Energy, " +
+                "Gearbox, Seat, Image, SUM(Quantity) AS Stock, MIN(AcquisitionDate) AS AcquisitionDate " +
+                "FROM Vehicle, Stock " +
+                "WHERE Vehicle.Id_Vehicle = Stock.Id_Vehicle " +
+                "AND Stock.Quantity > 0 " +
                 "GROUP BY Vehicle.Id_Vehicle;";
         if (con != null) {
             try {

@@ -30,7 +30,7 @@ public class CatalogController {
 
     // TODO
     @RequestMapping(value = "/management", method = RequestMethod.POST)
-    public ModelAndView management(ModelAndView mv, @RequestParam("action") String action) {
+    public ModelAndView management(@RequestParam("action") String action, ModelAndView mv) {
         User user = User.getInstance();
         // Appel DAO pour management et String sql avec if en fonction de action
         System.out.println(action);
