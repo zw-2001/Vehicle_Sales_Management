@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Cupcake</title>
+    <link rel="shortcut icon" href="/resources/images/logo/logo-icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/resources/css/errors.css"/>
 </head>
