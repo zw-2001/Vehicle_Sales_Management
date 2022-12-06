@@ -49,12 +49,11 @@ public class CatalogController {
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ModelAndView search(@RequestParam("search") String search, ModelAndView mv) {
-        System.out.println(search);
         CatalogDao catalogDao = new CatalogDao();
         int searchResult = catalogDao.search(search);
         if (searchResult != 0) {
             Catalog catalog = Catalog.getInstance();
-            if (catalog.getVehicles() != null) {
+            if (catalog.getVehicles().isEmpty()) {
                 mv.addObject("vehicles", catalog.getVehicles());
             } else {
                 mv.addObject("msg", "Aucun résultat.");
