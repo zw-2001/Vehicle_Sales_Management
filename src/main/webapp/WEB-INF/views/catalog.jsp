@@ -28,6 +28,16 @@
 </header>
 
 <div class="content" style="padding-top :50px">
+    <form action="/search" method="POST">
+        <div class="main-search-input-wrap">
+            <div class="main-search-input fl-wrap">
+                <div class="main-search-input-item">
+                    <input type="text" value="" name="search" placeholder="Rechercher...">
+                </div>
+                <button type="submit" class="main-search-button">Rechercher</button>
+            </div>
+        </div>
+    </form>
     <form action="/management" method="POST">
         <c:forEach var="vehicle" items="${vehicles}">
             <div class="container">
@@ -60,7 +70,8 @@
                             <td> ${vehicle.getEnergy()}</td>
                             <td> ${vehicle.getGearbox()}</td>
                             <c:if test="${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
-                                <td> ${vehicle.getQuantity()}</td>
+                                <td><input type="number" value="0" name="quantity[]" min="0" max="${vehicle.getQuantity()}"
+                                           style="width: 50px" required></td>
                                 <td><input type="checkbox" value="${vehicle.getId()}" name="checkbox[]"></td>
                             </c:if>
                         </tr>
@@ -70,14 +81,8 @@
         </c:forEach>
 
         <c:if test="${user == 'Administrator'}">
-            <button type="submit" name="action" value="delete" class="btn btn-connexion btn-outline-dark"
+            <button type="submit" value="delete" class="btn btn-connexion btn-outline-dark"
                     style="float : right; margin: 0px 50px 50px 0px">Supprimer
-            </button>
-            <button type="submit" name="action" value="available" class="btn btn-connexion btn-outline-dark"
-                    style="float : right; margin: 0px 50px 50px 0px">Mettre à disposition
-            </button>
-            <button type="submit" name="action" value="review" class="btn btn-connexion btn-outline-dark"
-                    style="float : right; margin: 0px 50px 50px 0px">Mettre en revision
             </button>
         </c:if>
     </form>
@@ -95,6 +100,7 @@
             </button>
         </form>
     </c:if>
+    <div style="text-align: center">${msg}</div>
 </div>
 
 <jsp:include page="/WEB-INF/fragments/footer.jsp"/>

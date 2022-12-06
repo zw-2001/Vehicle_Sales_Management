@@ -31,7 +31,6 @@
     <section>
         <div class="wrapper wrapper-historique">
             <br>
-            <center>Historique des véhicules que vous avez loué</center>
             <%--<?php
                     $facturationhistoriques = $_SESSION[FacturationHistoriques];
                     $lignesfacturationhistoriques = $_SESSION[LignesFacturationHistoriques];

@@ -27,7 +27,7 @@ public class CarDao {
                 PreparedStatement ps2 = con.prepareStatement(sql2);
                 ps2.setInt(1, quantity);
                 ps2.setDate(2, acquisitionDate);
-
+                ps2.executeUpdate();
                 return 1;
             } catch (Exception e) {
                 e.printStackTrace();

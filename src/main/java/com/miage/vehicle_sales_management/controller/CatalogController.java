@@ -30,12 +30,39 @@ public class CatalogController {
 
     // TODO
     @RequestMapping(value = "/management", method = RequestMethod.POST)
-    public ModelAndView management(@RequestParam("action") String action, ModelAndView mv) {
-        User user = User.getInstance();
-        // Appel DAO pour management et String sql avec if en fonction de action
-        System.out.println(action);
-        mv.addObject("user", user.getType());
-        //mv.setViewName("management");
+    public ModelAndView management(@RequestParam("quantity[]") int[] quantities,
+                                   @RequestParam("checkbox[]") String[] checkboxes, ModelAndView mv) {
+        if (checkboxes == null) {
+            mv.addObject("msg", "Aucun véhicule sélectionné.");
+        } else {
+            CatalogDao catalog = new CatalogDao();
+            if (catalog.deleteVehicles(quantities, checkboxes) != 0) {
+                mv.addObject("msg", "Véhicule(s) supprimé(s) avec succès !");
+            } else {
+                mv.addObject("msg", "Une erreur s'est produite lors de la suppression " +
+                        "du(es) véhicule(s). Veuillez réessayer.");
+            }
+        }
+        mv.setViewName("catalog");
+        return mv;
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public ModelAndView search(@RequestParam("search") String search, ModelAndView mv) {
+        System.out.println(search);
+        CatalogDao catalogDao = new CatalogDao();
+        int searchResult = catalogDao.search(search);
+        if (searchResult != 0) {
+            Catalog catalog = Catalog.getInstance();
+            if (catalog.getVehicles() != null) {
+                mv.addObject("vehicles", catalog.getVehicles());
+            } else {
+                mv.addObject("msg", "Aucun résultat.");
+            }
+        } else {
+            mv.addObject("msg", "Erreur lors de la recherche. Veuillez réessayer.");
+        }
+        mv.setViewName("catalog");
         return mv;
     }
 }
