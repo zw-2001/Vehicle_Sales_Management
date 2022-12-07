@@ -71,9 +71,19 @@
                             <td> ${vehicle.getEnergy()}</td>
                             <td> ${vehicle.getGearbox()}</td>
                             <c:if test="${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
-                                <td><input type="number" value="0" name="quantity[]" min="0" max="${vehicle.getQuantity()}"
-                                           style="width: 50px" required></td>
-                                <td><input type="checkbox" value="${vehicle.getId()}" name="checkbox[]"></td>
+                                <c:if test="${user == 'Administrator'}">
+                                    <td><input type="number" value="${vehicle.getQuantity()}" name="quantity[]" min="0"
+                                               max="${vehicle.getQuantity()}" style="width: 50px" required></td>
+                                </c:if>
+                                <c:if test="${user == 'Company'}">
+                                    <td><input type="number" value="0" name="quantity[]" min="0"
+                                               max="${vehicle.getQuantity()}" style="width: 50px" required></td>
+                                </c:if>
+                            <c:if test="${user == 'Individual'}">
+                                <td><input type="number" value="0" name="quantity[]" min="0"
+                                           max="${Math.min(vehicle.getQuantity(), Integer.parseInt("5"))}" style="width: 50px" required></td>
+                            </c:if>
+                            <td><input type="checkbox" value="${vehicle.getId()}" name="checkbox[]"></td>
                             </c:if>
                         </tr>
                     </table>

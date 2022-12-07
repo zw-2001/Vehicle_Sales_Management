@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -22,13 +23,15 @@
             <div class="txt animated pulse ">
                 <h1 style="color : white">Achetez plus qu'une voiture</h1>
                 <p style="color : white">Le pouvoir de rouler moins cher</p>
-                <div class="box-1">
-                    <a href="login">
-                        <div class="btn btn-one">
-                            <span>Commencez à acheter</span>
-                        </div>
-                    </a>
-                </div>
+                <c:if test="${user == 'General'}">
+                    <div class="box-1">
+                        <a href="login">
+                            <div class="btn btn-one">
+                                <span>Commencez à acheter</span>
+                            </div>
+                        </a>
+                    </div>
+                </c:if>
             </div>
         </div>
     </div>

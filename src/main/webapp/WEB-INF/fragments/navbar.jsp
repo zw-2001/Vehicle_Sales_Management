@@ -3,7 +3,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: transparent!important;">
     <a class="navbar-brand logo" href="/">
-        <img class="avec" src="/resources/images/logo/logo.png" style="height : 100px">
+        <img class="avec" src="/resources/images/logo/logo.png" style="height : 80px">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,16 @@
             <c:set var="user" scope="session" value="${user}"/>
             <form action="/catalog" method="POST">
                 <li color="black ; font-weight: bold;">
-                    <button type="submit">Consultation du catalogue</button>
+                    <c:if test="${user == 'General'}">
+                        <button type="submit">Consultation du catalogue</button>
+                    </c:if>
+                    <c:if test="${user == 'Administrator'}">
+                        <button type="submit">Gestion des véhicules</button>
+                    </c:if>
+                    <c:if test="${user == 'Company' || user == 'Individual'}">
+                        <button type="submit">Obtenir un véhicule</button>
+                    </c:if>
+
                 </li>
             </form>
             <c:if test="${user == 'Administrator'}">
@@ -27,7 +36,12 @@
             <c:if test="${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
                 <form action="/history" method="POST">
                     <li color="black ; font-weight: bold;">
-                        <button type="submit">Historique</button>
+                        <c:if test="${user == 'Administrator'}">
+                            <button type="submit">Historique de ventes</button>
+                        </c:if>
+                        <c:if test="${user == 'Company' || user == 'Individual'}">
+                            <button type="submit">Historique d'achats</button>
+                        </c:if>
                     </li>
                 </form>
             </c:if>
