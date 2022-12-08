@@ -99,9 +99,14 @@
 
 <script>
     var swiper = new Swiper('.swiper-container', {
+        autoplay: {
+            delay: 2000,
+        },
+        loop: true,
         effect: 'coverflow',
         grabCursor: true,
         centeredSlides: true,
+        speed: 1250,
         slidesPerView: 'auto',
         coverflowEffect: {
             rotate: 20,
@@ -110,7 +115,6 @@
             modifier: 1,
             slideShadows: true,
         },
-        loop: true,
     });
 </script>
 </body>
