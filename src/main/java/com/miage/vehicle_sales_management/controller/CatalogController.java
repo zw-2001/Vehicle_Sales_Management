@@ -53,7 +53,7 @@ public class CatalogController {
         int searchResult = catalogDao.search(search);
         if (searchResult != 0) {
             Catalog catalog = Catalog.getInstance();
-            if (catalog.getVehicles().isEmpty()) {
+            if (catalog.getVehicles().size() != 0) {
                 mv.addObject("vehicles", catalog.getVehicles());
             } else {
                 mv.addObject("msg", "Aucun résultat.");
