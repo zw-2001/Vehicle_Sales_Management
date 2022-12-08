@@ -32,42 +32,55 @@
     <section>
         <div class="wrapper wrapper-historique">
             <br>
-            <%--<?php
-                    $facturationhistoriques = $_SESSION[FacturationHistoriques];
-                    $lignesfacturationhistoriques = $_SESSION[LignesFacturationHistoriques];
-
-                    foreach ($facturationhistoriques as $facturationhistorique) { 
-                        echo
-                        <details>
-            <summary>Facture # $facturationhistorique[IdFacturation]   </summary>;
-            foreach ($lignesfacturationhistoriques as $lignesfacturationhistorique) {
-            if ($facturationhistorique[IdFacturation] == $lignesfacturationhistorique[IdFacturation]) {
-            echo
-            <table>
-            <tr style="background-color: rgba(00005);">
-                <th scope="row"> Marque </th>
-                <td>  $lignesfacturationhistorique[Marque]  </td>
-                </tr>
-            <tr>
-                <th scope="row"> Dates de location </th>
-                <td> Du   $lignesfacturationhistorique[DateDebut]    au    $lignesfacturationhistorique[DateFin]  </td>
-                </tr>
-            <tr>
-                <th scope="row"> Vehicule </th>
-                <td>  $lignesfacturationhistorique[Type]  </td>
-                </tr>
-            <tr>
-                <th scope="row">Prix</th>
-                <td>  $lignesfacturationhistorique[Prix]  </td>
-                </tr>
-            </table>;
-            }
-            }
-            echo
-            </details>;
-            }
-            ?>--%>
+            <c:forEach var="invoice" items="${invoices}">
+                <details>
+                <summary>
+                    Facture # ${invoice.getId()} |
+                    Date : ${invoice.getDate()} |
+                    Paiement : ${invoice.getPayment()} |
+                    Mensualité : ${invoice.getNbMonth()} |
+                    Total : ${invoice.getTotal()} €
+                </summary>
+                <c:forEach var="invoicedetail" items="${invoice.getInvoiceDetail()}">
+                    <table>
+                        <tr style="background-color: rgba(0,0,0,0.5);">
+                            <th scope="row"> Véhicule </th>
+                            <td>  ${invoicedetail.getVehicle().getVehicle()}  </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Type </th>
+                            <td> ${invoicedetail.getVehicle().getType()} </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Marque </th>
+                            <td>  ${invoicedetail.getVehicle().getBrand()} </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Prix</th>
+                            <td>  ${invoicedetail.getVehicle().getPrice()}  </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Quantity</th>
+                            <td>  ${invoicedetail.getQuantity()}  </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Énergie</th>
+                            <td>  ${invoicedetail.getVehicle().getGearbox()}  </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Place</th>
+                            <td>  ${invoicedetail.getVehicle().getSeat()}  </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Total</th>
+                            <td>  ${invoicedetail.getTotal()}  </td>
+                        </tr>
+                    </table>
+                </c:forEach>
+                </details>
+            </c:forEach>
         </div>
+        <div> ${msg} </div>
     </section>
 </div>
 

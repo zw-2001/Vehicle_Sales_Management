@@ -1,5 +1,9 @@
 package com.miage.vehicle_sales_management.model.users;
 
+import com.miage.vehicle_sales_management.model.documents.Invoice;
+
+import java.util.ArrayList;
+
 /**
  * @author Lisa-Marie
  * User class : Define a simple user which is not a company, neither an admin
@@ -7,11 +11,12 @@ package com.miage.vehicle_sales_management.model.users;
 public class User {
 
     private static User instance;
+    private int id;
     private String type;
     private String email;
-    private String password;
     private String firstName;
     private String lastName;
+    private ArrayList<Invoice> invoices;
 
     /**
      * Man constructor of the User class
@@ -21,18 +26,38 @@ public class User {
      * @param firstName
      * @param lastName
      */
-    private User(String type, String email, String firstName, String lastName) {
+    private User(int id, String type, String email, String firstName, String lastName) {
+        this.id = id;
         this.type = type;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.invoices = new ArrayList<>();
     }
 
     public static User getInstance() {
         if (instance == null) {
-            instance = new User("General", "", "", "");
+            instance = new User(0, "General", "", "", "");
         }
         return instance;
+    }
+
+    /**
+     * Get the type of the user
+     *
+     * @return id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Set the type of the user
+     *
+     * @param id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -108,24 +133,41 @@ public class User {
     }
 
     /**
-     * Get the Password of the user
+     * Get the invoices of the user
      *
-     * @return password
+     * @return invoices
      */
-    public String getPassword() {
-        return password;
+    public ArrayList<Invoice> getInvoices() {
+        return invoices;
     }
 
     /**
-     * Set the Password of the user
+     * Set the invoices of the user
      *
-     * @param password
+     * @param invoices
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setInvoices(ArrayList<Invoice> invoices) {
+        this.invoices = invoices;
     }
 
     public void logout() {
         instance = null;
+    }
+
+    public void addInvoice(Invoice invoice) {
+        invoices.add(invoice);
+    }
+
+    public Invoice getInvoice(int id) {
+        for (Invoice invoice : invoices) {
+            if (invoice.getId() == id) {
+                return invoice;
+            }
+        }
+        return null;
+    }
+
+    public void clearInvoices() {
+        invoices.clear();
     }
 }

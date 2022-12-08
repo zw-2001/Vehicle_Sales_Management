@@ -20,6 +20,7 @@ public class UserDao {
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     User user = User.getInstance();
+                    user.setId(rs.getInt("Id_User"));
                     user.setType(rs.getString("Type"));
                     user.setEmail(rs.getString("Email"));
                     user.setLastName(rs.getString("LastName"));

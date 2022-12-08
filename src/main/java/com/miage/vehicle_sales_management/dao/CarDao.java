@@ -24,10 +24,10 @@ public class CarDao {
                 ps.setString(7, seat);
                 ps.setString(8, image);
                 ps.executeUpdate();
-                PreparedStatement ps2 = con.prepareStatement(sql2);
-                ps2.setInt(1, quantity);
-                ps2.setDate(2, acquisitionDate);
-                ps2.executeUpdate();
+                ps = con.prepareStatement(sql2);
+                ps.setInt(1, quantity);
+                ps.setDate(2, acquisitionDate);
+                ps.executeUpdate();
                 return 1;
             } catch (Exception e) {
                 e.printStackTrace();
