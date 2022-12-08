@@ -47,7 +47,9 @@
             </c:if>
             <form action="/contact" method="POST">
                 <li color="black ; font-weight: bold;">
-                    <button type="submit">Contact</button>
+                    <c:if test="${user == 'General' || user == 'Company' || user == 'Individual'}">
+                        <button type="submit">Contact</button>
+                    </c:if>
                 </li>
             </form>
         </ul>
