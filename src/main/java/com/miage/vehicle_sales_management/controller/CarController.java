@@ -1,8 +1,6 @@
 package com.miage.vehicle_sales_management.controller;
 
 import com.miage.vehicle_sales_management.dao.CarDao;
-import com.miage.vehicle_sales_management.model.cars.Vehicle;
-import com.miage.vehicle_sales_management.model.shop.Catalog;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,8 +32,6 @@ public class CarController {
         int addCar = new CarDao().addCar(vehicle, type, brand, price, energy, gearbox, seat, image, quantity, acquisitionDate);
         if (addCar != 0) {
             mv.addObject("msg", "Véhicule ajouté avec succès !");
-            Catalog catalog = Catalog.getInstance();
-            catalog.addVehicle(new Vehicle(0, vehicle, type, brand, price, energy, gearbox, seat, image, quantity, acquisitionDate));
         } else {
             mv.addObject("msg", "Une erreur s'est produite lors de l'ajout du véhicule. " +
                     "Veuillez réessayer.");
