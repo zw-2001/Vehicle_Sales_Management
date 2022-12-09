@@ -68,12 +68,13 @@
 
                     <label>Date d'acquisition : </label>
                     <input class="champ" type="date" placeholder="Date d'acquisition du véhicule" name="AcquisitionDate" required/>
+
+
                 </div>
 
                 <div style="text-align: center; padding-bottom: 20px">${msg}</div>
 
                 <%-- TODO : Ajouter un champ pour l'upload de la photo --%>
-                <%--
                 <div id="file-upload-form" class="uploader" style="margin-bottom:50px">
                     <input id="file-upload" type="file" name="fileUpload" accept="image/*"/>
 
@@ -93,7 +94,6 @@
                         </div>
                     </label>
                 </div>
---%>
                 <button type="submit" class="btn btn-outline-warning" style="float : right; margin: 50px 50px 50px 0px">
                     Poster
                 </button>
