@@ -41,7 +41,7 @@
     </form>
     <form action="/management" method="POST">
         <c:forEach var="vehicle" items="${vehicles}">
-            <div class="container">
+            <div class="container catalog-container">
                 <div class=" box boxL">
                     <img src="/resources/images/cars/catalog/${vehicle.getImage()}"/>
                 </div>
@@ -59,9 +59,9 @@
                             <th> Marque</th>
                             <th> Énergie</th>
                             <th> Boîte de vitesse</th>
+                            <th> Nombre de places</th>
                             <c:if test="${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
                                 <th> Quantité</th>
-                                <th> Ajouter</th>
                             </c:if>
                         </tr>
                         <tr>
@@ -70,6 +70,7 @@
                             <td> ${vehicle.getBrand()}</td>
                             <td> ${vehicle.getEnergy()}</td>
                             <td> ${vehicle.getGearbox()}</td>
+                            <td> ${vehicle.getSeat()}</td>
                             <c:if test="${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
                                 <c:if test="${user == 'Administrator'}">
                                     <td><input type="number" value="${vehicle.getQuantity()}" name="quantity[]" min="0"
@@ -79,11 +80,12 @@
                                     <td><input type="number" value="0" name="quantity[]" min="0"
                                                max="${vehicle.getQuantity()}" style="width: 50px" required></td>
                                 </c:if>
-                            <c:if test="${user == 'Individual'}">
-                                <td><input type="number" value="0" name="quantity[]" min="0"
-                                           max="${Math.min(vehicle.getQuantity(), Integer.parseInt("5"))}" style="width: 50px" required></td>
-                            </c:if>
-                            <td><input type="checkbox" value="${vehicle.getId()}" name="checkbox[]"></td>
+                                <c:if test="${user == 'Individual'}">
+                                    <td><input type="number" value="0" name="quantity[]" min="0"
+                                               max="${Math.min(vehicle.getQuantity(), Integer.parseInt("5"))}"
+                                               style="width: 50px" required></td>
+                                </c:if>
+                                <td style="display: none"><input type="checkbox" value="${vehicle.getId()}" name="checkbox[]" checked></td>
                             </c:if>
                         </tr>
                     </table>
@@ -92,22 +94,20 @@
         </c:forEach>
 
         <c:if test="${user == 'Administrator'}">
-            <button type="submit" value="delete" class="btn btn-connexion btn-outline-dark"
+            <button type="submit" value="delete" name="action" class="btn btn-connexion btn-outline-dark"
                     style="float : right; margin: 0px 50px 50px 0px">Supprimer
+            </button>
+        </c:if>
+        <c:if test="${user == 'Company' || user == 'Individual'}">
+            <button type="submit" value="cart" name="action" class="btn btn-connexion btn-outline-dark"
+                    style="float : right; margin: 0px 50px 50px 0px">Ajouter
             </button>
         </c:if>
     </form>
     <c:if test="${user == 'Administrator'}">
         <form action="/add-car" method="POST">
-            <button type="sumit" class="btn btn-connexion btn-outline-dark"
-                    style="margin-left: 50px">Ajouter une voiture
-            </button>
-        </form>
-    </c:if>
-    <c:if test="${user == 'Company' || user == 'Individual'}">
-        <form>
             <button type="submit" class="btn btn-connexion btn-outline-dark"
-                    style="float : right; margin: 0px 50px 50px 0px">Confirmer
+                    style="margin-left: 50px">Ajouter une voiture
             </button>
         </form>
     </c:if>

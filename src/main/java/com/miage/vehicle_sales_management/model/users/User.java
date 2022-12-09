@@ -1,6 +1,7 @@
 package com.miage.vehicle_sales_management.model.users;
 
 import com.miage.vehicle_sales_management.model.documents.Invoice;
+import com.miage.vehicle_sales_management.model.shop.Cart;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,8 @@ public class User {
     private String lastName;
     private ArrayList<Invoice> invoices;
 
+    private static Cart cart;
+
     /**
      * Man constructor of the User class
      *
@@ -33,6 +36,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.invoices = new ArrayList<>();
+        this.cart = Cart.getInstance();
     }
 
     public static User getInstance() {
@@ -152,6 +156,13 @@ public class User {
 
     public void logout() {
         instance = null;
+        id = 0;
+        type = "";
+        email = "";
+        firstName = "";
+        lastName = "";
+        invoices.clear();
+        cart.clearCart();
     }
 
     public void addInvoice(Invoice invoice) {
@@ -169,5 +180,9 @@ public class User {
 
     public void clearInvoices() {
         invoices.clear();
+    }
+
+    public Cart getCart() {
+        return cart;
     }
 }

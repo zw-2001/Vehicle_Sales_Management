@@ -18,8 +18,8 @@ public class CatalogController {
     public ModelAndView catalog(ModelAndView mv) {
         User user = User.getInstance();
         mv.addObject("user", user.getType());
-        int catalog = new CatalogDao().showCatalog();
-        if (catalog != 0) {
+        boolean catalog = new CatalogDao().showCatalog();
+        if (catalog) {
             mv.addObject("vehicles", Catalog.getInstance().getVehicles());
         } else {
             mv.addObject("msg", "Catalogue vide.");
@@ -30,28 +30,55 @@ public class CatalogController {
 
     // TODO
     @RequestMapping(value = "/management", method = RequestMethod.POST)
-    public ModelAndView management(@RequestParam("quantity[]") int[] quantities,
-                                   @RequestParam("checkbox[]") String[] checkboxes, ModelAndView mv) {
-        if (checkboxes == null) {
-            mv.addObject("msg", "Aucun véhicule sélectionné.");
-        } else {
-            CatalogDao catalog = new CatalogDao();
-            if (catalog.deleteVehicles(quantities, checkboxes) != 0) {
+    public ModelAndView management(@RequestParam("action") String action,
+                                   @RequestParam("quantity[]") int[] quantities,
+                                   @RequestParam("checkbox[]") int[] checkboxes, ModelAndView mv) {
+        mv.setViewName("catalog");
+        CatalogDao catalog = new CatalogDao();
+        if (action.equals("delete")) {
+            if (catalog.deleteVehicles(quantities, checkboxes)) {
                 mv.addObject("msg", "Véhicule(s) supprimé(s) avec succès !");
             } else {
                 mv.addObject("msg", "Une erreur s'est produite lors de la suppression " +
                         "du(es) véhicule(s). Veuillez réessayer.");
             }
+        } else if (action.equals("cart")) {
+            if (catalog.addVehiclesToCart(quantities, checkboxes)) {
+                mv.setViewName("redirect:/cart");
+            } else {
+                mv.addObject("msg", "Une erreur s'est produite lors de l'ajout " +
+                        "du(es) véhicule(s) au panier. Veuillez réessayer.");
+            }
+        } else {
+            mv.addObject("msg", "Une erreur s'est produite. Veuillez réessayer.");
         }
-        mv.setViewName("catalog");
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/cart", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView cart(ModelAndView mv) {
+        User user = User.getInstance();
+        if (user.getCart().getVehicles().isEmpty()) {
+            mv.addObject("msg", "Votre panier est vide.");
+        } else {
+            mv.addObject("cartVehicles", user.getCart().getVehicles());
+        }
+        mv.setViewName("cart");
+        return mv;
+    }
+
+    @RequestMapping(value = "/clear-cart", method = RequestMethod.POST)
+    public ModelAndView clearCart(ModelAndView mv) {
+        User.getInstance().getCart().clearCart();
+        mv.setViewName("/cart");
         return mv;
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ModelAndView search(@RequestParam("search") String search, ModelAndView mv) {
         CatalogDao catalogDao = new CatalogDao();
-        int searchResult = catalogDao.search(search);
-        if (searchResult != 0) {
+        if (catalogDao.search(search)) {
             Catalog catalog = Catalog.getInstance();
             if (catalog.getVehicles().size() != 0) {
                 mv.addObject("vehicles", catalog.getVehicles());
@@ -64,4 +91,38 @@ public class CatalogController {
         mv.setViewName("catalog");
         return mv;
     }
+
+    // TODO : Continuer ici après avoir appuyé sur confirmer le panier
+    /*@RequestMapping(value = "/invoice", method = RequestMethod.POST)
+    public ModelAndView invoice(@RequestParam("checkbox[]") int[] checkboxes, ModelAndView mv) {
+        CatalogDao catalogDao = new CatalogDao();
+        if (catalogDao.invoice(checkboxes)) {
+            mv.addObject("msg", "Facture générée avec succès !");
+        } else {
+            mv.addObject("msg", "Une erreur s'est produite lors de la génération " +
+                    "de la facture. Veuillez réessayer.");
+        }
+        mv.setViewName("invoice");
+        return mv;
+    }*/
+
+    /*@RequestMapping(value = "/buy-confirmation", method = RequestMethod.POST)
+    public ModelAndView buyConfirmation(@RequestParam("payment") String payment,
+                                        @RequestParam("quantity[]") int[] quantities,
+                                        @RequestParam("checkbox[]") int[] checkboxes, ModelAndView mv) {
+        if (payment.equals("cash") || payment.equals("credit")) {
+            CatalogDao catalog = new CatalogDao();
+            if (catalog.confirmBuyVehicles(quantities, checkboxes, payment)) {
+                mv.addObject("msg", "Véhicule(s) acheté(s) avec succès !");
+            } else {
+                mv.addObject("msg", "Une erreur s'est produite lors de l'achat " +
+                        "du(es) véhicule(s). Veuillez réessayer.");
+            }
+        } else {
+            mv.addObject("msg", "Une erreur s'est produite lors de la confirmation " +
+                    "de votre commande. Veuillez réessayer.");
+        }
+
+        return mv;
+    }*/
 }

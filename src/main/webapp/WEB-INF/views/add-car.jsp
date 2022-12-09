@@ -12,6 +12,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/resources/css/style.css"/>
 </head>
+
 <body class="body-ajoutvoiture" style="background-color :#191919!important; color : white">
 <header>
     <div class="background-image-container bg-ajoutvoiture">

@@ -12,7 +12,7 @@ import java.util.List;
 public class CatalogDao {
     private Connection con = ConnectionManager.getConnection();
 
-    public int showCatalog() {
+    public boolean showCatalog() {
         String sql = "SELECT Vehicle.Id_Vehicle AS Id_Vehicle, Vehicle, Type, Brand, Vehicle.Price AS Price, Energy, " +
                 "Gearbox, Seat, Image, SUM(Quantity) AS Stock, MIN(AcquisitionDate) AS AcquisitionDate " +
                 "FROM Vehicle, Stock " +
@@ -27,28 +27,14 @@ public class CatalogDao {
                 e.printStackTrace();
             }
         }
-        return 0;
+        return false;
     }
 
-    public int deleteVehicles(int[] quantities, String[] checkboxes) {
-        String sql = "UPDATE Stock SET Quantity = Quantity - ? WHERE Id_Vehicle = ?;";
-        if (con != null) {
-            try {
-                for (int i = 0; i < checkboxes.length; i++) {
-                    PreparedStatement ps = con.prepareStatement(sql);
-                    ps.setInt(1, quantities[i]);
-                    ps.setInt(2, Integer.parseInt(checkboxes[i]));
-                    ps.executeUpdate();
-                }
-                return 1;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return 0;
+    public boolean deleteVehicles(int[] quantities, int[] checkboxes) {
+        return updateStock(quantities, checkboxes);
     }
 
-    public int search(String search) {
+    public boolean search(String search) {
         List<String> searchList = Arrays.asList(search.toLowerCase().split(" "));
         String searchSql = "";
         if (searchList.contains("et") || searchList.contains("ou")) {
@@ -63,7 +49,6 @@ public class CatalogDao {
         searchSql += ") ";
 
         String sql = "SELECT Vehicle.Id_Vehicle AS Id_Vehicle, Vehicle, Type, Brand, Vehicle.Price AS Price, Energy, Gearbox, Seat, Image, SUM(Quantity) AS Stock, MIN(AcquisitionDate) AS AcquisitionDate FROM Vehicle, Stock WHERE Vehicle.Id_Vehicle = Stock.Id_Vehicle AND Stock.Quantity > 0 AND ((Vehicle LIKE ? OR Type LIKE ? OR Brand LIKE ? OR Energy LIKE ? OR Gearbox LIKE ? OR Seat LIKE ?)" + searchSql + "GROUP BY Vehicle.Id_Vehicle;";
-        System.out.println(sql);
         if (con != null) {
             try {
                 PreparedStatement ps = con.prepareStatement(sql);
@@ -86,10 +71,10 @@ public class CatalogDao {
                 e.printStackTrace();
             }
         }
-        return 0;
+        return false;
     }
 
-    private int addCarsToCatalog(PreparedStatement ps) throws SQLException {
+    private boolean addCarsToCatalog(PreparedStatement ps) throws SQLException {
         ResultSet rs = ps.executeQuery();
         Catalog catalog = Catalog.getInstance();
         catalog.clearCatalog();
@@ -100,7 +85,7 @@ public class CatalogDao {
             if (rs.getDate("AcquisitionDate").compareTo(sqlDate) < 0) {
                 discount += 0.1;
             }
-            if (User.getInstance().getType().equals("Enterprise")) {
+            if (User.getInstance().getType().equals("Company")) {
                 discount += 0.1;
             }
             float price = (1 - discount) * rs.getFloat("Price");
@@ -121,6 +106,47 @@ public class CatalogDao {
             );
             catalog.addVehicle(vehicle);
         }
-        return 1;
+        return true;
+    }
+
+    /*public boolean confirmBuyVehicles(int[] quantities, int[] checkboxes, String payment) {
+        String sql = "INSERT INTO Invoice (Id_Invoice, Id_User, Date, Payment, NbMonth, Total) VALUES (?, ?, ?, ?, ?, ?);";
+
+        return updateStock(quantities, checkboxes);
+    }*/
+
+    private boolean updateStock(int[] quantities, int[] checkboxes) {
+        String sql = "UPDATE Stock SET Quantity = Quantity - ? WHERE Id_Vehicle = ?;";
+        if (con != null) {
+            try {
+                for (int i = 0; i < checkboxes.length; i++) {
+                    PreparedStatement ps = con.prepareStatement(sql);
+                    ps.setInt(1, quantities[i]);
+                    ps.setInt(2, checkboxes[i]);
+                    ps.executeUpdate();
+                }
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public boolean addVehiclesToCart(int[] quantities, int[] checkboxes) {
+        try {
+            for (Vehicle vehicle : Catalog.getInstance().getVehicles()) {
+                for (int i = 0; i < quantities.length; i++) {
+                    if (quantities[i] > 0 && vehicle.getId() == checkboxes[i]) {
+                        User.getInstance().getCart().addVehicle(vehicle, quantities[i]);
+                    }
+                }
+            }
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

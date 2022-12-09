@@ -434,9 +434,13 @@ nav ul li {
 
 .container {
     position: relative;
-    width: 2000px;
+    width: 100%;
     height: 250px;
     margin: 80px;
+}
+
+.catalog-container {
+    max-width: 1200px;
 }
 
 .container .box {

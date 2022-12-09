@@ -1,110 +1,82 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: zheng
-  Date: 09/12/2022
-  Time: 14:19
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <!------ Include the above in your HEAD tag ---------->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-8">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <div class="panel-title">
-              <div class="row">
-                <div class="col-xs-6">
-                  <h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
-                </div>
-                <div class="col-xs-6">
-                  <button type="button" class="btn btn-primary btn-sm btn-block">
-                    <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
-              </div>
-              <div class="col-xs-4">
-                <h4 class="product-name"><strong>Product name</strong></h4><h4><small>Product description</small></h4>
-              </div>
-              <div class="col-xs-6">
-                <div class="col-xs-6 text-right">
-                  <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
-                </div>
-                <div class="col-xs-4">
-                  <input type="text" class="form-control input-sm" value="1">
-                </div>
-                <div class="col-xs-2">
-                  <button type="button" class="btn btn-link btn-xs">
-                    <span class="glyphicon glyphicon-trash"> </span>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
-              </div>
-              <div class="col-xs-4">
-                <h4 class="product-name"><strong>Product name</strong></h4><h4><small>Product description</small></h4>
-              </div>
-              <div class="col-xs-6">
-                <div class="col-xs-6 text-right">
-                  <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
-                </div>
-                <div class="col-xs-4">
-                  <input type="text" class="form-control input-sm" value="1">
-                </div>
-                <div class="col-xs-2">
-                  <button type="button" class="btn btn-link btn-xs">
-                    <span class="glyphicon glyphicon-trash"> </span>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="text-center">
-                <div class="col-xs-9">
-                  <h6 class="text-right">Added items?</h6>
-                </div>
-                <div class="col-xs-3">
-                  <button type="button" class="btn btn-default btn-sm btn-block">
-                    Update cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="panel-footer">
-            <div class="row text-center">
-              <div class="col-xs-9">
-                <h4 class="text-right">Total <strong>$50.00</strong></h4>
-              </div>
-              <div class="col-xs-3">
-                <button type="button" class="btn btn-success btn-block">
-                  Checkout
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Cupcake</title>
+    <link rel="shortcut icon" href="/resources/images/logo/logo-icon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/resources/css/style.css"/>
 </head>
-<body>
+
+<body class="body-location">
+<header>
+    <div class="background-image-container bg-location">
+        <div class="background-image-overlay"></div>
+        <jsp:include page="/WEB-INF/fragments/navbar.jsp"/>
+        <div class="cadre">
+            <div class="txt animated pulse ">
+                <h1 style="color : white">Louez plus qu'une voiture</h1>
+                <p style="color : white">Le pouvoir de rouler moins cher </p>
+            </div>
+        </div>
+    </div>
+    </div>
+</header>
+<div class=" content" style="padding-top :50px">
+    <form action='/invoice' method='POST'>
+        <c:forEach var="cartVehicle" items="${cartVehicles}">
+        <div class="container catalog-container">
+            <div class=" box boxL">
+                <img src="/resources/images/cars/catalog/${cartVehicle.getImage()}" >
+            </div>
+            <div class=" box boxR">
+                <div class="boxR-prix">
+                    <p class="prix-bloc"> Total : euros </p>
+                </div>
+                <table>
+                    <tr>
+                        <th> Véhicule</th>
+                        <th> Type</th>
+                        <th> Marque</th>
+                        <th> Énergie</th>
+                        <th> Boîte de vitesse</th>
+                        <th> Nombre de places</th>
+                        <th> Quantité </th>
+                        <th> Prix </th>
+                    </tr>
+                    <tr>
+                        <td> ${cartVehicle.getVehicle()}</td>
+                        <td> ${cartVehicle.getType()}</td>
+                        <td> ${cartVehicle.getBrand()}</td>
+                        <td> ${cartVehicle.getEnergy()}</td>
+                        <td> ${cartVehicle.getGearbox()}</td>
+                        <td> ${cartVehicle.getSeat()}</td>
+                        <td>
+                            <input type="number" value="${cartVehicle.getQuantity()}" name="quantity[]" min="0"
+                                       max="${cartVehicle.getQuantity()}" style="width: 50px" required>
+                        </td>
+                        <td> ${cartVehicle.getPrice()} €</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </c:forEach>
+        <button type="submit" class="btn btn-connexion btn-outline-dark"
+                style="float : right; margin: 0px 50px 50px 0px">Confirmer</button>
+    </form>
+    <form action="/clear-cart" method="POST">
+        <button type="submit" class="btn btn-connexion btn-outline-dark"
+                style="float : right; margin: 0px 50px 50px 0px">Vider</button>
+    </form>
+    <div>${msg}</div>
+</div>
+
+<jsp:include page="/WEB-INF/fragments/footer.jsp"/>
 
 </body>
 </html>

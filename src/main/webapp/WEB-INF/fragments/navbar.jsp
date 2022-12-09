@@ -1,11 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</head>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: transparent!important;">
     <a class="navbar-brand logo" href="/">
@@ -21,13 +15,13 @@
             <form action="/catalog" method="POST">
                 <li color="black ; font-weight: bold;">
                     <c:if test="${user == 'General'}">
-                        <button type="submit"><mark class="black">Consultation du catalogue</mark></button>
+                        <button type="submit"><mark class="black" style="border-radius: 30px">Consultation du catalogue</mark></button>
                     </c:if>
                     <c:if test="${user == 'Administrator'}">
-                        <button type="submit"><mark class="black">Gestion des véhicules</mark></button>
+                        <button type="submit"><mark class="black" style="border-radius: 30px">Gestion des véhicules</mark></button>
                     </c:if>
                     <c:if test="${user == 'Company' || user == 'Individual'}">
-                        <button type="submit"><mark class="black">Obtenir un véhicule</mark></button>
+                        <button type="submit"><mark class="black" style="border-radius: 30px">Obtenir un véhicule</mark></button>
                     </c:if>
 
                 </li>
@@ -35,7 +29,7 @@
             <c:if test="${user == 'Administrator'}">
                 <form action="/add-car" method="POST">
                     <li color="black ; font-weight: bold;">
-                        <button type="submit"><mark class="black">Ajouter des voitures</mark></button>
+                        <button type="submit"><mark class="black" style="border-radius: 30px">Ajouter des voitures</mark></button>
                     </li>
                 </form>
             </c:if>
@@ -43,10 +37,10 @@
                 <form action="/history" method="POST">
                     <li color="black ; font-weight: bold;">
                         <c:if test="${user == 'Administrator'}">
-                            <button type="submit"><mark class="black">Historique des ventes</mark></button>
+                            <button type="submit"><mark class="black" style="border-radius: 30px">Historique des ventes</mark></button>
                         </c:if>
                         <c:if test="${user == 'Company' || user == 'Individual'}">
-                            <button type="submit"><mark class="black">Historique d'achats</mark></button>
+                            <button type="submit"><mark class="black" style="border-radius: 30px">Historique d'achats</mark></button>
                         </c:if>
                     </li>
                 </form>
@@ -54,14 +48,16 @@
             <form action="/contact" method="POST">
                 <li color="black ; font-weight: bold;">
                     <c:if test="${user == 'General' || user == 'Company' || user == 'Individual'}">
-                        <button type="submit"><mark class="black">Contact</mark></button>
+                        <button type="submit"><mark class="black" style="border-radius: 30px">Contact</mark></button>
                     </c:if>
                 </li>
             </form>
         </ul>
     </div>
     <c:if test="${user == 'Company' || user == 'Individual'}">
-    <a href="C:\Users\zheng\OneDrive\Bureau\M1 MIAGE\Semestre 1\Programmation Objet avancée\Projet\Vehicle_Sales_Management\src\main\webapp\WEB-INF\views\cart.jsp" class="button" style="color : black"><i class='fas fa-cart-arrow-down'></i> Panier</a>
+        <form action="/cart" method="POST">
+            <button type="submit" class="button" style="color : black"><i class='fas fa-cart-arrow-down'></i> Panier</button>
+        </form>
     </c:if>
     <c:choose>
         <c:when test="${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
