@@ -311,6 +311,17 @@ nav ul li {
     margin-right: 1%;
 }
 
+.place-pannier{
+    margin-right:50px;
+}
+
+.para-pannier {
+    width: 40px;
+    height: 40px;
+}
+
+/*truc ...*/
+
 
 /*------------ CONNEXION ------------*/
 
@@ -352,7 +363,6 @@ nav ul li {
 .connexion-form .input-fields {
     height: 350px;
 }
-
 
 /* ------------ FOOTER ------------*/
 

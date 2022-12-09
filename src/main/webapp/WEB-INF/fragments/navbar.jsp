@@ -54,6 +54,11 @@
             </form>
         </ul>
     </div>
+    <c:if test="${user == 'Company' || user == 'Individual'}">
+        <a class="place-pannier" href="">
+            <img class="para-pannier" src="/resources/images/panier/panier.png">
+        </a>
+    </c:if>
     <c:choose>
         <c:when test="${user == 'Administrator' || user == 'Company' || user == 'Individual'}">
             <form action="/logout" method="POST">
