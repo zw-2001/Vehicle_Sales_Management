@@ -2,11 +2,10 @@ package com.miage.vehicle_sales_management.dao;
 
 import com.miage.vehicle_sales_management.model.cars.Vehicle;
 import com.miage.vehicle_sales_management.model.shop.Catalog;
+import com.miage.vehicle_sales_management.model.users.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -94,19 +93,31 @@ public class CatalogDao {
         ResultSet rs = ps.executeQuery();
         Catalog catalog = Catalog.getInstance();
         catalog.clearCatalog();
+        LocalDate date = LocalDate.now();
+        Date sqlDate = Date.valueOf(date.minusYears(1));
         while (rs.next()) {
+            float discount = 0;
+            if (rs.getDate("AcquisitionDate").compareTo(sqlDate) < 0) {
+                discount += 0.1;
+            }
+            if (User.getInstance().getType().equals("Enterprise")) {
+                discount += 0.1;
+            }
+            float price = (1 - discount) * rs.getFloat("Price");
             Vehicle vehicle = new Vehicle(
                     rs.getInt("Id_Vehicle"),
                     rs.getString("Vehicle"),
                     rs.getString("Type"),
                     rs.getString("Brand"),
-                    rs.getFloat("Price"),
+                    price,
                     rs.getString("Energy"),
                     rs.getString("Gearbox"),
                     rs.getString("Seat"),
                     rs.getString("Image"),
                     rs.getInt("Stock"),
-                    rs.getDate("AcquisitionDate")
+                    rs.getDate("AcquisitionDate"),
+                    discount
+
             );
             catalog.addVehicle(vehicle);
         }

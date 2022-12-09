@@ -71,7 +71,8 @@ public class HistoryDao {
                                                 rs2.getString("Seat"),
                                                 null,
                                                 0,
-                                                null
+                                                null,
+                                                0
                                         ),
                                         rs2.getInt("Quantity"),
                                         rs2.getBigDecimal("Total")

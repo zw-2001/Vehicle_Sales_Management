@@ -1,5 +1,6 @@
 package com.miage.vehicle_sales_management.model.cars;
 
+import java.time.LocalDate;
 import java.sql.Date;
 import java.text.DecimalFormat;
 
@@ -17,7 +18,7 @@ public class Vehicle {
     private Date acquisitionDate;
     private float discount;
 
-    public Vehicle(int id, String vehicle, String type, String brand, float price, String energy, String gearBox, String seat, String image, int quantity, Date acquisitionDate) {
+    public Vehicle(int id, String vehicle, String type, String brand, float price, String energy, String gearBox, String seat, String image, int quantity, Date acquisitionDate, float discount) {
         this.id = id;
         this.vehicle = vehicle;
         this.type = type;
@@ -29,7 +30,7 @@ public class Vehicle {
         this.image = image;
         this.quantity = quantity;
         this.acquisitionDate = acquisitionDate;
-        this.discount = 0;
+        this.discount = discount;
     }
 
     public int getId() {
