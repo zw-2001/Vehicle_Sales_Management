@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.NoSuchAlgorithmException;
+
 @Controller
 @SessionAttributes("user")
 public class UserController {
@@ -49,7 +51,7 @@ public class UserController {
     @RequestMapping(value = "/signup-check", method = RequestMethod.POST)
     public ModelAndView signupCheck(@RequestParam("lastName") String lastName, @RequestParam("firstName") String firstName,
                                     @RequestParam("type") String type, @RequestParam("email") String email,
-                                    @RequestParam("password") String password, ModelAndView mv) {
+                                    @RequestParam("password") String password, ModelAndView mv) throws NoSuchAlgorithmException {
         int signup = new UserDao().signupUser(type, email, password, lastName, firstName);
 
         if (signup != 0) {
