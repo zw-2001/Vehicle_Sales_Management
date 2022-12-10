@@ -6,6 +6,7 @@ import com.miage.vehicle_sales_management.model.users.User;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -110,11 +111,16 @@ public class CatalogDao {
         return true;
     }
 
-    /*public boolean confirmBuyVehicles(int[] quantities, int[] checkboxes, String payment) {
-        String sql = "INSERT INTO Invoice (Id_Invoice, Id_User, Date, Payment, NbMonth, Total) VALUES (?, ?, ?, ?, ?, ?);";
 
-        return updateStock(quantities, checkboxes);
-    }*/
+    private boolean updateStock(ArrayList<Vehicle> vehicles) {
+        int[] quantities = new int[vehicles.size()];
+        int[] vehiclesId = new int[vehicles.size()];
+        for (int i = 0; i < vehicles.size(); i++) {
+            quantities[i] = vehicles.get(i).getQuantity();
+            vehiclesId[i] = vehicles.get(i).getId();
+        }
+        return updateStock(quantities, vehiclesId);
+    }
 
     private boolean updateStock(int[] quantities, int[] checkboxes) {
         String sql = "UPDATE Stock SET Quantity = Quantity - ? WHERE Id_Vehicle = ?;";
@@ -160,18 +166,62 @@ public class CatalogDao {
     }
 
     public boolean getNextInvoiceId() {
-        String sql = "SELECT Auto_increment\n" +
-                "FROM information_schema.tables\n" +
-                "WHERE table_name = 'Invoice'";
+        String sql = "SELECT MAX(Id_Invoice) + 1 AS NEXT_ID\n" +
+                "FROM   Invoice\n";
 
         if (con != null) {
             try {
                 PreparedStatement ps = con.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    User.getInstance().getCart().setInvoiceId(rs.getInt("Auto_increment"));
+                    User.getInstance().getCart().setInvoiceId(rs.getInt("NEXT_ID"));
                     return true;
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public boolean payment(String payment) {
+        String sql = "INSERT INTO Invoice (Id_User, Date, Payment, NbMonth, Total) VALUES (?, ?, ?, ?, ?);";
+        String sql2 = "INSERT INTO InvoiceDetail (Id_Invoice, Id_Vehicle, Quantity, Total) VALUES (?, ?, ?, ?);";
+        if (con != null) {
+            try {
+                User user = User.getInstance();
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, user.getId());
+                ps.setDate(2, Date.valueOf(LocalDate.now()));
+                if (payment.equals("credit3")) {
+                    ps.setString(3, "Credit");
+                    ps.setInt(4, 3);
+                } else if (payment.equals("credit6")) {
+                    ps.setString(3, "Credit");
+                    ps.setInt(4, 6);
+                } else if (payment.equals("credit12")) {
+                    ps.setString(3, "Credit");
+                    ps.setInt(4, 12);
+                } else {
+                    ps.setString(3, "Cash");
+                    ps.setInt(4, 0);
+                }
+                ps.setFloat(5, Float.parseFloat(user.getCart().getTotal().replace(',', '.')));
+                ps.executeUpdate();
+                for (Vehicle vehicle : Catalog.getInstance().getVehicles()) {
+                    for (int i = 0; i < user.getCart().getVehicles().size(); i++) {
+                        PreparedStatement ps2 = con.prepareStatement(sql2);
+                        if (vehicle.getId() == user.getCart().getVehicles().get(i).getId()) {
+                            ps2.setInt(1, user.getCart().getInvoiceId());
+                            ps2.setInt(2, user.getCart().getVehicles().get(i).getId());
+                            ps2.setInt(3, user.getCart().getVehicles().get(i).getQuantity());
+                            ps2.setFloat(4, Float.parseFloat(vehicle.getPrice().replace(',', '.')) * user.getCart().getVehicles().get(i).getQuantity());
+                            ps2.executeUpdate();
+                        }
+
+                    }
+                }
+                return updateStock(user.getCart().getVehicles());
             } catch (Exception e) {
                 e.printStackTrace();
             }

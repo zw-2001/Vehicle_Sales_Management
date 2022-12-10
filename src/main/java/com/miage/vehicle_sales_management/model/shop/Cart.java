@@ -12,10 +12,12 @@ public class Cart {
     private ArrayList<Vehicle> vehicles;
 
     private int InvoiceId;
+    private boolean payment;
     private float total;
 
     public Cart() {
         this.vehicles = new ArrayList<>();
+        this.payment = false;
     }
 
     public static Cart getInstance() {
@@ -40,6 +42,9 @@ public class Cart {
 
     public void clearCart() {
         this.vehicles.clear();
+        this.InvoiceId = 0;
+        this.payment = false;
+        this.total = 0;
     }
 
     public int getInvoiceId() {
@@ -57,5 +62,12 @@ public class Cart {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    public boolean getPayment() {
+        return payment;
+    }
+    public void setPayment(boolean payment) {
+        this.payment = payment;
     }
 }

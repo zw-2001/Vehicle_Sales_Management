@@ -24,7 +24,8 @@ public class HistoryDao {
     public int showHistory() {
         String sql = "SELECT Invoice.Id_Invoice, Date, Payment, NbMonth, Total\n" +
                 "FROM Invoice, User\n" +
-                "WHERE Invoice.Id_User = ?";
+                "WHERE Invoice.Id_User = User.Id_User\n" +
+                "AND Invoice.Id_User = ?";
         return selectInvoiceDetails(sql);
     }
 

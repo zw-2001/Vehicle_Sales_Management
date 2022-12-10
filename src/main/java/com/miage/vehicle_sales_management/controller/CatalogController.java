@@ -94,17 +94,11 @@ public class CatalogController {
         return mv;
     }
 
-    @RequestMapping(value = "/invoice", method = RequestMethod.POST)
+    @RequestMapping(value = "/invoice", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView invoice(@RequestParam("quantity[]") int[] quantities, @RequestParam("checkbox[]") int[] checkboxes, ModelAndView mv) {
         CatalogDao catalog = new CatalogDao();
         if (catalog.addVehiclesToCart(quantities, checkboxes) && catalog.getNextInvoiceId()) {
-            User user = User.getInstance();
-            mv.addObject("invoiceId", user.getCart().getInvoiceId());
-            mv.addObject("currentDate", LocalDate.now());
-            mv.addObject("cartVehicles", user.getCart().getVehicles());
-            mv.addObject("userAttribute", user);
-            mv.addObject("total", user.getCart().getTotal());
-            mv.setViewName("invoice");
+            getInvoiceInfo(mv);
         } else {
             mv.addObject("msg", "Une erreur s'est produite lors de la génération " +
                     "de la facture. Veuillez réessayer.");
@@ -113,22 +107,35 @@ public class CatalogController {
         return mv;
     }
 
-/*    @RequestMapping(value = "/buy-confirmation", method = RequestMethod.POST)
-    public ModelAndView buyConfirmation(@RequestParam("payment") String payment,
-                                        @RequestParam("quantity[]") int[] quantities,
-                                        @RequestParam("checkbox[]") int[] checkboxes, ModelAndView mv) {
-        if (payment.equals("cash") || payment.equals("credit")) {
+    @RequestMapping(value = "/invoice-management", method = RequestMethod.POST)
+    public ModelAndView invoiceManagement(@RequestParam("action") String action, ModelAndView mv) {
+        if (action.equals("cash") || action.equals("credit3") || action.equals("credit6") || action.equals("credit12")) {
             CatalogDao catalog = new CatalogDao();
-            if (catalog.confirmBuyVehicles(quantities, checkboxes, payment)) {
+            if (catalog.payment(action)) {
                 mv.addObject("msg", "Véhicule(s) acheté(s) avec succès !");
             } else {
                 mv.addObject("msg", "Une erreur s'est produite lors de l'achat " +
                         "du(es) véhicule(s). Veuillez réessayer.");
             }
-        } else {
+            User.getInstance().getCart().setPayment(true);
+            getInvoiceInfo(mv);
+        }
+        else {
             mv.addObject("msg", "Une erreur s'est produite lors de la confirmation " +
                     "de votre commande. Veuillez réessayer.");
         }
+        mv.setViewName("invoice");
         return mv;
-    }*/
+    }
+
+    private void getInvoiceInfo(ModelAndView mv) {
+        User user = User.getInstance();
+        mv.addObject("invoiceId", user.getCart().getInvoiceId());
+        mv.addObject("invoicePayment", user.getCart().getPayment());
+        mv.addObject("currentDate", LocalDate.now());
+        mv.addObject("cartVehicles", user.getCart().getVehicles());
+        mv.addObject("userAttribute", user);
+        mv.addObject("total", user.getCart().getTotal());
+        mv.setViewName("invoice");
+    }
 }
