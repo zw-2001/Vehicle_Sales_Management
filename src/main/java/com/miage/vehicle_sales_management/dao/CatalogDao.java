@@ -1,6 +1,6 @@
 package com.miage.vehicle_sales_management.dao;
 
-import com.miage.vehicle_sales_management.model.cars.Vehicle;
+import com.miage.vehicle_sales_management.model.vehicles.Vehicle;
 import com.miage.vehicle_sales_management.model.shop.Catalog;
 import com.miage.vehicle_sales_management.model.users.User;
 
@@ -86,9 +86,10 @@ public class CatalogDao {
                 discount += 0.1;
             }
             if (User.getInstance().getType().equals("Company")) {
-                discount += 0.1;
+                discount += 0.05;
             }
-            float price = (1 - discount) * rs.getFloat("Price");
+            User user = User.getInstance();
+            float price = (1 - discount) * rs.getFloat("Price") * Float.parseFloat(user.getCountry().getTax().replace(',', '.'));
             Vehicle vehicle = new Vehicle(
                     rs.getInt("Id_Vehicle"),
                     rs.getString("Vehicle"),
@@ -152,8 +153,7 @@ public class CatalogDao {
             }
             User.getInstance().getCart().setTotal(total);
             return true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;

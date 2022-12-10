@@ -82,8 +82,10 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td style="text-align: right"><h2>Total :</h2></td>
-                            <td colspan="2" style="text-align: right"><h2>${total} €</h2></td>
+                            <td style="text-align: right"><h2>Total :</h2><br>
+                            <h2>Taxes :</h2></td>
+                            <td colspan="2" style="text-align: right"><h2>${total} €</h2><br>
+                            <h2>${(userAttribute.getCountry().getTax().replace(',', '.') * 100) - 100} %</h2></td>
                         </tr>
                     </table>
                 </div>
@@ -92,8 +94,11 @@
         <div style="text-align: center; padding-bottom: 20px">${msg}</div>
 
         <form action="" method='POST'>
-            <button type="submit" class="btn btn-facturation btn-outline-dark"
-                    style="float : right; margin: 50px 50px 50px 0px">Payer
+            <button type="submit" class="btn btn-facturation btn-outline-dark" value="cash"
+                    style="float : right; margin: 50px 50px 50px 0px">Paiment au comptant
+            </button>
+            <button type="submit" class="btn btn-facturation btn-outline-dark" value="cash"
+                    style="float : right; margin: 50px 50px 50px 0px">Paiment au comptant
             </button>
         </form>
     </div>
