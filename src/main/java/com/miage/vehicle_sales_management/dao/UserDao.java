@@ -1,6 +1,7 @@
 package com.miage.vehicle_sales_management.dao;
 
 
+import com.miage.vehicle_sales_management.model.country.Country;
 import com.miage.vehicle_sales_management.model.users.User;
 
 import java.security.MessageDigest;
@@ -12,13 +13,16 @@ import java.sql.ResultSet;
 public class UserDao {
     private Connection con = ConnectionManager.getConnection();
 
-    public int loginUser(String email, String password) {
-        String sql = "SELECT * FROM User WHERE Email = ? AND Password = ?";
+    public int loginUser(String email, String password) throws NoSuchAlgorithmException {
+        String sql = "SELECT * FROM User, Country WHERE User.Id_Country = Country.Id_Country AND Email = ? AND Password = ?";
         if (con != null) {
+            MessageDigest md = MessageDigest.getInstance("SHA3-256");
+            byte[] result = md.digest(password.getBytes());
+            String hashedPassword = new String(result);
             try {
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setString(1, email);
-                ps.setString(2, password);
+                ps.setString(2, hashedPassword);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     User user = User.getInstance();
@@ -27,6 +31,7 @@ public class UserDao {
                     user.setEmail(rs.getString("Email"));
                     user.setLastName(rs.getString("LastName"));
                     user.setFirstName(rs.getString("FirstName"));
+                    user.setCountry(new Country(rs.getInt("Id_Country"), rs.getString("Name"), rs.getFloat("Tax") + 1));
                     return 1;
                 }
             } catch (Exception e) {
@@ -60,7 +65,7 @@ public class UserDao {
 
                 // login after successfully signed up
                 try {
-                    loginUser(email, hashedPassword);
+                    loginUser(email, password);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

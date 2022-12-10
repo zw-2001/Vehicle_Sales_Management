@@ -26,7 +26,7 @@ public class UserController {
 
     @RequestMapping(value = "/login-check", method = RequestMethod.POST)
     public ModelAndView loginCheck(@RequestParam("email") String email, @RequestParam("password") String password,
-                                   ModelAndView mv) {
+                                   ModelAndView mv) throws NoSuchAlgorithmException {
         User user = User.getInstance();
         int login = new UserDao().loginUser(email, password);
 
