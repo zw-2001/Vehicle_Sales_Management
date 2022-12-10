@@ -21,7 +21,6 @@ public class CarController {
         return mv;
     }
 
-    // TODO
     @RequestMapping(value = "/add-car-check", method = RequestMethod.POST)
     public ModelAndView addCarCheck(@RequestParam("Vehicle") String vehicle, @RequestParam("Type") String type,
                                     @RequestParam("Brand") String brand, @RequestParam("Price") float price,
