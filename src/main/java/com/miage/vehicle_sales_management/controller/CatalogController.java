@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
+
 @Controller
 @SessionAttributes("user")
 public class CatalogController {
@@ -28,7 +30,6 @@ public class CatalogController {
         return mv;
     }
 
-    // TODO
     @RequestMapping(value = "/management", method = RequestMethod.POST)
     public ModelAndView management(@RequestParam("action") String action,
                                    @RequestParam("quantity[]") int[] quantities,
@@ -71,6 +72,7 @@ public class CatalogController {
     @RequestMapping(value = "/clear-cart", method = RequestMethod.POST)
     public ModelAndView clearCart(ModelAndView mv) {
         User.getInstance().getCart().clearCart();
+        mv.addObject("msg", "Votre panier a été vidé avec succès !");
         mv.setViewName("/cart");
         return mv;
     }
@@ -92,21 +94,26 @@ public class CatalogController {
         return mv;
     }
 
-    // TODO : Continuer ici après avoir appuyé sur confirmer le panier
-    /*@RequestMapping(value = "/invoice", method = RequestMethod.POST)
-    public ModelAndView invoice(@RequestParam("checkbox[]") int[] checkboxes, ModelAndView mv) {
-        CatalogDao catalogDao = new CatalogDao();
-        if (catalogDao.invoice(checkboxes)) {
-            mv.addObject("msg", "Facture générée avec succès !");
+    @RequestMapping(value = "/invoice", method = RequestMethod.POST)
+    public ModelAndView invoice(@RequestParam("quantity[]") int[] quantities, @RequestParam("checkbox[]") int[] checkboxes, ModelAndView mv) {
+        CatalogDao catalog = new CatalogDao();
+        if (catalog.addVehiclesToCart(quantities, checkboxes) && catalog.getNextInvoiceId()) {
+            User user = User.getInstance();
+            mv.addObject("invoiceId", user.getCart().getInvoiceId());
+            mv.addObject("currentDate", LocalDate.now());
+            mv.addObject("cartVehicles", user.getCart().getVehicles());
+            mv.addObject("userAttribute", user);
+            mv.addObject("total", user.getCart().getTotal());
+            mv.setViewName("invoice");
         } else {
             mv.addObject("msg", "Une erreur s'est produite lors de la génération " +
                     "de la facture. Veuillez réessayer.");
+            mv.setViewName("cart");
         }
-        mv.setViewName("invoice");
         return mv;
-    }*/
+    }
 
-    /*@RequestMapping(value = "/buy-confirmation", method = RequestMethod.POST)
+/*    @RequestMapping(value = "/buy-confirmation", method = RequestMethod.POST)
     public ModelAndView buyConfirmation(@RequestParam("payment") String payment,
                                         @RequestParam("quantity[]") int[] quantities,
                                         @RequestParam("checkbox[]") int[] checkboxes, ModelAndView mv) {
@@ -122,7 +129,6 @@ public class CatalogController {
             mv.addObject("msg", "Une erreur s'est produite lors de la confirmation " +
                     "de votre commande. Veuillez réessayer.");
         }
-
         return mv;
     }*/
 }

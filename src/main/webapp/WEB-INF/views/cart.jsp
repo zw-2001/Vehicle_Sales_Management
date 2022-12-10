@@ -36,7 +36,7 @@
             </div>
             <div class=" box boxR">
                 <div class="boxR-prix">
-                    <p class="prix-bloc"> Total : euros </p>
+                    <p class="prix-bloc"> Total : ${cartVehicle.getPrice(cartVehicle.getQuantity())} euros </p>
                 </div>
                 <table>
                     <tr>
@@ -60,7 +60,8 @@
                             <input type="number" value="${cartVehicle.getQuantity()}" name="quantity[]" min="0"
                                        max="${cartVehicle.getQuantity()}" style="width: 50px" required>
                         </td>
-                        <td> ${cartVehicle.getPrice()} €</td>
+                        <td> ${cartVehicle.getPrice(1)} €</td>
+                        <td style="display: none"><input type="checkbox" value="${cartVehicle.getId()}" name="checkbox[]" checked></td>
                     </tr>
                 </table>
             </div>
@@ -73,7 +74,7 @@
         <button type="submit" class="btn btn-connexion btn-outline-dark"
                 style="float : right; margin: 0px 50px 50px 0px">Vider</button>
     </form>
-    <div>${msg}</div>
+    <div style="text-align: center; padding-bottom: 20px">${msg}</div>
 </div>
 
 <jsp:include page="/WEB-INF/fragments/footer.jsp"/>

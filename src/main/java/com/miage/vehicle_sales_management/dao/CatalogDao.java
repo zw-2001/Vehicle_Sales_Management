@@ -135,17 +135,46 @@ public class CatalogDao {
 
     public boolean addVehiclesToCart(int[] quantities, int[] checkboxes) {
         try {
+            User.getInstance().getCart().clearCart();
+            float total = 0;
             for (Vehicle vehicle : Catalog.getInstance().getVehicles()) {
-                for (int i = 0; i < quantities.length; i++) {
+                for (int i = 0; i < checkboxes.length; i++) {
                     if (quantities[i] > 0 && vehicle.getId() == checkboxes[i]) {
+                        if (quantities[i] > 20) {
+                            float discount = (float) 0.05;
+                            vehicle.setDiscount(vehicle.getDiscount() + discount);
+                            vehicle.setPrice(Float.parseFloat(vehicle.getPrice()) * (1 - vehicle.getDiscount()));
+                        }
                         User.getInstance().getCart().addVehicle(vehicle, quantities[i]);
+                        total += Float.parseFloat(vehicle.getPrice().replace(',', '.')) * quantities[i];
                     }
                 }
             }
+            User.getInstance().getCart().setTotal(total);
             return true;
         }
         catch (Exception e) {
             e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean getNextInvoiceId() {
+        String sql = "SELECT Auto_increment\n" +
+                "FROM information_schema.tables\n" +
+                "WHERE table_name = 'Invoice'";
+
+        if (con != null) {
+            try {
+                PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    User.getInstance().getCart().setInvoiceId(rs.getInt("Auto_increment"));
+                    return true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return false;
     }

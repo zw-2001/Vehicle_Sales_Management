@@ -48,7 +48,7 @@
 
                 <div class=" box boxR">
                     <div class="boxR-prix">
-                        <p class="prix-bloc"> ${vehicle.getPrice()} euros</p>
+                        <p class="prix-bloc"> ${vehicle.getPrice(1)} euros</p>
                     </div>
 
                     <table>
@@ -111,7 +111,7 @@
             </button>
         </form>
     </c:if>
-    <div style="text-align: center">${msg}</div>
+    <div style="text-align: center; padding-bottom: 20px">${msg}</div>
 </div>
 
 <jsp:include page="/WEB-INF/fragments/footer.jsp"/>

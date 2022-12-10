@@ -1,6 +1,5 @@
 package com.miage.vehicle_sales_management.model.cars;
 
-import java.time.LocalDate;
 import java.sql.Date;
 import java.text.DecimalFormat;
 
@@ -49,13 +48,19 @@ public class Vehicle {
         return brand;
     }
 
-    public Object getPrice() {
-        if (price % 1 == 0) {
-            return (int) price;
+    public String getPrice() {
+        return getPrice(1);
+    }
+    public String getPrice(int quantity) {
+        if ((price*quantity) % 1 == 0) {
+            return Integer.toString((int) (price*quantity));
         } else {
             DecimalFormat df = new DecimalFormat("#.00");
-            return df.format(price);
+            return df.format((price*quantity));
         }
+    }
+
+    public void setPrice(float v) {
     }
 
     public String getEnergy() {
@@ -80,5 +85,13 @@ public class Vehicle {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(float discount) {
+        this.discount = discount;
     }
 }

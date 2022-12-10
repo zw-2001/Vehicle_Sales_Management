@@ -633,10 +633,9 @@ nav ul li {
 
 #invoice {
     position: relative;
-    /* top: -290px; */
     margin: 0 auto;
-    width: 700px;
-    background: #fff;
+    width: 800px;
+    background: #f1dbcd;
 }
 
 [id*="invoice-"] {
@@ -657,7 +656,7 @@ nav ul li {
     min-height: 250px;
 }
 
-.logoChenWheels {
+.logo-cupcake {
     display: block;
     float: left;
     margin-left: 20px;
@@ -668,6 +667,9 @@ nav ul li {
     color: #222;
 }
 
+.body-facturation {
+    background-color: #E1BA98 !important;
+}
 .facturation .title p {
     text-align: right;
 }
