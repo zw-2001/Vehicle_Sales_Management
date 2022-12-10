@@ -1,5 +1,6 @@
 package com.miage.vehicle_sales_management.model.users;
 
+import com.miage.vehicle_sales_management.model.country.Country;
 import com.miage.vehicle_sales_management.model.documents.Invoice;
 import com.miage.vehicle_sales_management.model.shop.Cart;
 
@@ -13,12 +14,14 @@ public class User {
 
     private static User instance;
     private int id;
+    private Country country;
     private String type;
     private String email;
     private String firstName;
     private String lastName;
     private ArrayList<Invoice> invoices;
     private static Cart cart;
+
 
     /**
      * Man constructor of the User class
@@ -28,8 +31,9 @@ public class User {
      * @param firstName
      * @param lastName
      */
-    private User(int id, String type, String email, String firstName, String lastName) {
+    private User(int id, String country, String type, String email, String firstName, String lastName) {
         this.id = id;
+        this.country = new Country(1, country, 20);
         this.type = type;
         this.email = email;
         this.firstName = firstName;
@@ -40,9 +44,27 @@ public class User {
 
     public static User getInstance() {
         if (instance == null) {
-            instance = new User(0, "General", "", "", "");
+            instance = new User(0, "France", "General", "", "", "");
         }
         return instance;
+    }
+
+    /**
+     * Get the country of the user
+     *
+     * @return country
+     */
+    public Country getCountry() {
+        return country;
+    }
+
+    /**
+     * Set the country of the user
+     *
+     * @param country
+     */
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     /**

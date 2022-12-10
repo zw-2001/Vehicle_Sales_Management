@@ -1,6 +1,6 @@
 package com.miage.vehicle_sales_management.model.shop;
 
-import com.miage.vehicle_sales_management.model.cars.Vehicle;
+import com.miage.vehicle_sales_management.model.vehicles.Vehicle;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

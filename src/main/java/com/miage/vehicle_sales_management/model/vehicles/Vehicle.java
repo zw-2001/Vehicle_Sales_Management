@@ -1,4 +1,4 @@
-package com.miage.vehicle_sales_management.model.cars;
+package com.miage.vehicle_sales_management.model.vehicles;
 
 import java.sql.Date;
 import java.text.DecimalFormat;

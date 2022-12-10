@@ -1,6 +1,6 @@
 package com.miage.vehicle_sales_management.dao;
 
-import com.miage.vehicle_sales_management.model.cars.Vehicle;
+import com.miage.vehicle_sales_management.model.vehicles.Vehicle;
 import com.miage.vehicle_sales_management.model.documents.Invoice;
 import com.miage.vehicle_sales_management.model.documents.InvoiceDetail;
 import com.miage.vehicle_sales_management.model.users.User;

@@ -1,6 +1,6 @@
 package com.miage.vehicle_sales_management.model.documents;
 
-import com.miage.vehicle_sales_management.model.cars.Vehicle;
+import com.miage.vehicle_sales_management.model.vehicles.Vehicle;
 
 import java.math.BigDecimal;
 
