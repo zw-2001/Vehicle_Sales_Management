@@ -51,14 +51,15 @@ public class UserController {
     @RequestMapping(value = "/signup-check", method = RequestMethod.POST)
     public ModelAndView signupCheck(@RequestParam("lastName") String lastName, @RequestParam("firstName") String firstName,
                                     @RequestParam("type") String type, @RequestParam("email") String email,
-                                    @RequestParam("password") String password, ModelAndView mv) throws NoSuchAlgorithmException {
-        int signup = new UserDao().signupUser(type, email, password, lastName, firstName);
+                                    @RequestParam("password") String password,
+                                    @RequestParam("country") String country, ModelAndView mv) throws NoSuchAlgorithmException {
+        int signup = new UserDao().signupUser(type, email, password, lastName, firstName, country);
 
         if (signup != 0) {
             mv.addObject("user", User.getInstance().getType());
             mv.setViewName("redirect:/catalog");
         } else {
-            mv.addObject("msg", "Un compte associé à cette adresse email existe déjà.");
+            mv.addObject("msg", "Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
             mv.setViewName("signup");
         }
         return mv;

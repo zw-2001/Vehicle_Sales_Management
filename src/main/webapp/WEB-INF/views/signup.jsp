@@ -55,6 +55,10 @@
                                                    name="password" required/></td>
                                     </tr>
                                     <tr>
+                                        <td>Pays :</td>
+                                        <td><jsp:include page="/WEB-INF/fragments/country-list.jsp"/></td>
+                                    </tr>
+                                    <tr>
                                         <td>
                                             <button type="submit"
                                                     class="btn btn-connexion btn-outline-dark">Inscrire

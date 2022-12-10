@@ -36,24 +36,31 @@ public class UserDao {
         return 0;
     }
 
-    public int signupUser(String type, String email, String password, String lastName, String firstName) throws NoSuchAlgorithmException {
-        String sql = "INSERT INTO User (Type, Email, Password, LastName, FirstName) VALUES (?, ?, ?, ?, ?)";
+    public int signupUser(String type, String email, String password, String lastName, String firstName, String country) throws NoSuchAlgorithmException {
+        String sql = "INSERT INTO User (Id_Country, Type, Email, Password, LastName, FirstName)\n" +
+                "VALUES (\n" +
+                "(SELECT Country.Id_Country\n" +
+                "FROM Country\n" +
+                "WHERE Country.Name = ?)\n" +
+                ", ?, ?, ?, ?, ?)";
 
         if (con != null) {
             MessageDigest md = MessageDigest.getInstance("SHA3-256");
             byte[] result = md.digest(password.getBytes());
+            String hashedPassword = new String(result);
             try {
                 PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, type);
-                ps.setString(2, email);
-                ps.setString(3, String.valueOf(result));
-                ps.setString(4, lastName);
-                ps.setString(5, firstName);
+                ps.setString(1, country);
+                ps.setString(2, type);
+                ps.setString(3, email);
+                ps.setString(4, hashedPassword);
+                ps.setString(5, lastName);
+                ps.setString(6, firstName);
                 ps.executeUpdate();
 
                 // login after successfully signed up
                 try {
-                    loginUser(email, password);
+                    loginUser(email, hashedPassword);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
