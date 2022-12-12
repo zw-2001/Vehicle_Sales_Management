@@ -150,7 +150,7 @@ public class CatalogDao {
                         if (quantities[i] > 20) {
                             float discount = (float) 0.05;
                             vehicle.setDiscount(vehicle.getDiscount() + discount);
-                            vehicle.setPrice(Float.parseFloat(vehicle.getPrice()) * (1 - vehicle.getDiscount()));
+                            vehicle.setPrice(Float.parseFloat(vehicle.getPrice().replace(',', '.')) * (1 - vehicle.getDiscount()));
                         }
                         User.getInstance().getCart().addVehicle(vehicle, quantities[i]);
                         total += Float.parseFloat(vehicle.getPrice().replace(',', '.')) * quantities[i];

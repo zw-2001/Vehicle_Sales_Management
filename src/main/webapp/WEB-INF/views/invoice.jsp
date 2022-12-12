@@ -59,15 +59,17 @@
                             <th><h2 class="info-fac-table">Marque</h2></th>
                             <th><h2 class="info-fac-table">Prix</h2></th>
                             <th><h2 class="info-fac-table">Quantité</h2></th>
+                            <th><h2 class="info-fac-table">Remise</h2></th>
                             <th><h2 class="info-fac-table">Total</h2></th>
                         </tr>
                         <c:forEach var="cartVehicle" items="${cartVehicles}">
                             <tr class="service">
-                                <td><p class="itemtext info-fac"> ${cartVehicle.getId()}</p></td>
+                                <td><p class="itemtext info-fac"> ${cartVehicle.getVehicle()}</p></td>
                                 <td><p class="itemtext info-fac"> ${cartVehicle.getType()}</p></td>
                                 <td><p class="itemtext info-fac"> ${cartVehicle.getBrand()}</p></td>
                                 <td><p class="itemtext info-fac"> ${cartVehicle.getPrice(1)} €</p></td>
                                 <td><p class="itemtext info-fac"> ${cartVehicle.getQuantity()}</p></td>
+                                <td><p class="itemtext info-fac"> ${Math.round(cartVehicle.getDiscount() * 100)} %</p></td>
                                 <td><p class="itemtext info-fac"> ${cartVehicle.getPrice(cartVehicle.getQuantity())}
                                     €</p></td>
                             </tr>
@@ -77,10 +79,12 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
                             <td style="text-align: right"><h2>Total :</h2></td>
                             <td colspan="2" style="text-align: right"><h2>${total} €</h2></td>
                         </tr>
                         <tr class="tabletitle"></tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -95,16 +99,16 @@
 
         <form action="/invoice-management" method='POST'>
             <c:if test="${invoicePayment == false}">
-                <button type="submit" class="btn btn-facturation btn-outline-dark" value="cash" name="payment"
+                <button type="submit" class="btn btn-facturation btn-outline-dark" value="cash" name="action"
                         style="float : right; margin: 50px 50px 50px 0px">Paiment au comptant
                 </button>
-                <button type="submit" class="btn btn-facturation btn-outline-dark" value="credit3" name="payment"
+                <button type="submit" class="btn btn-facturation btn-outline-dark" value="credit3" name="action"
                         style="float : right; margin: 50px 50px 50px 0px">Paiment à crédit 12 mois
                 </button>
-                <button type="submit" class="btn btn-facturation btn-outline-dark" value="credit6" name="payment"
+                <button type="submit" class="btn btn-facturation btn-outline-dark" value="credit6" name="action"
                         style="float : right; margin: 50px 50px 50px 0px">Paiment à crédit 6 mois
                 </button>
-                <button type="submit" class="btn btn-facturation btn-outline-dark" value="credit12" name="payment"
+                <button type="submit" class="btn btn-facturation btn-outline-dark" value="credit12" name="action"
                         style="float : right; margin: 50px 50px 50px 0px">Paiment à crédit 3 mois
                 </button>
             </c:if>
@@ -123,7 +127,7 @@
 
 <script>
     function generatePDF() {
-        const pdf = document.getElementById('invoice');
+        const pdf = document.getElementById('facturation');
         html2pdf().from(pdf).save("facture.pdf");
     }
 </script>
