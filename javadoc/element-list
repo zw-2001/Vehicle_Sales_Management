@@ -1,0 +1,7 @@
+com.miage.vehicle_sales_management.controller
+com.miage.vehicle_sales_management.dao
+com.miage.vehicle_sales_management.model.country
+com.miage.vehicle_sales_management.model.documents
+com.miage.vehicle_sales_management.model.shop
+com.miage.vehicle_sales_management.model.users
+com.miage.vehicle_sales_management.model.vehicles
