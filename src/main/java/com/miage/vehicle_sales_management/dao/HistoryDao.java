@@ -9,19 +9,29 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * Model of the history controller
+ */
 public class HistoryDao {
 
     private Connection con = ConnectionManager.getConnection();
 
-
-    public int showHistoryAdmin() {
+    /**
+     * Get all invoice history from all users
+     * @return true if no errors occurred, false otherwise
+     */
+    public boolean showHistoryAdmin() {
         String sql = "SELECT Invoice.Id_Invoice, Date, Payment, NbMonth, Total\n" +
                 "FROM Invoice, User\n" +
                 "WHERE Invoice.Id_User = User.Id_User;";
         return selectInvoiceDetails(sql);
     }
 
-    public int showHistory() {
+    /**
+     * Get all invoice history from the user
+     * @return true if no errors occurred, false otherwise
+     */
+    public boolean showHistory() {
         String sql = "SELECT Invoice.Id_Invoice, Date, Payment, NbMonth, Total\n" +
                 "FROM Invoice, User\n" +
                 "WHERE Invoice.Id_User = User.Id_User\n" +
@@ -29,7 +39,12 @@ public class HistoryDao {
         return selectInvoiceDetails(sql);
     }
 
-    private int selectInvoiceDetails(String sql) {
+    /**
+     * Get all invoice details from the invoice
+     * @param sql The query to execute
+     * @return true if no errors occurred, false otherwise
+     */
+    private boolean selectInvoiceDetails(String sql) {
         String sql2 = "SELECT Invoice.Id_Invoice, Quantity, Vehicle.Id_Vehicle, Vehicle, Type, Brand, Price, Energy, Gearbox, Seat, Image, InvoiceDetail.Total AS Total\n" +
                 "FROM Invoice, InvoiceDetail, Vehicle\n" +
                 "WHERE Invoice.Id_Invoice = InvoiceDetail.Id_Invoice\n" +
@@ -70,6 +85,7 @@ public class HistoryDao {
                                                 rs2.getString("Energy"),
                                                 rs2.getString("Gearbox"),
                                                 rs2.getString("Seat"),
+                                                // Information not needed
                                                 null,
                                                 0,
                                                 null,
@@ -81,11 +97,11 @@ public class HistoryDao {
                         );
                     }
                 }
-                return 1;
+                return true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return 0;
+        return false;
     }
 }

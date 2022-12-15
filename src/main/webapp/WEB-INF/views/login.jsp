@@ -47,7 +47,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <a href="/signup" style="color : white"> Pas encore inscrit ? </a>
+                                <a href="/register" style="color : white"> Pas encore inscrit ? </a>
                             </form>
                             <div>${msg}</div>
                         </td>

@@ -7,12 +7,12 @@ import com.miage.vehicle_sales_management.model.shop.Cart;
 import java.util.ArrayList;
 
 /**
- * @author Lisa-Marie
- * User class : Define a simple user which is not a company, neither an admin
+ * Class User to manage the users of the website
  */
 public class User {
 
     private static User instance;
+    private static Cart cart;
     private int id;
     private Country country;
     private String type;
@@ -20,16 +20,17 @@ public class User {
     private String firstName;
     private String lastName;
     private ArrayList<Invoice> invoices;
-    private static Cart cart;
 
 
     /**
-     * Man constructor of the User class
+     * Constructor of the class User
      *
-     * @param type
-     * @param email
-     * @param firstName
-     * @param lastName
+     * @param id        The id of the user
+     * @param country   The country of the user
+     * @param type      The type of the user
+     * @param email     The email of the user
+     * @param firstName The first name of the user
+     * @param lastName  The last name of the user
      */
     private User(int id, String country, String type, String email, String firstName, String lastName) {
         this.id = id;
@@ -42,6 +43,12 @@ public class User {
         this.cart = Cart.getInstance();
     }
 
+    /**
+     * Design pattern Singleton
+     * Get the instance of the user
+     *
+     * @return the instance of the user
+     */
     public static User getInstance() {
         if (instance == null) {
             instance = new User(0, "France", "General", "", "", "");
@@ -52,7 +59,7 @@ public class User {
     /**
      * Get the country of the user
      *
-     * @return country
+     * @return the country of the user
      */
     public Country getCountry() {
         return country;
@@ -61,25 +68,25 @@ public class User {
     /**
      * Set the country of the user
      *
-     * @param country
+     * @param country the country of the user
      */
     public void setCountry(Country country) {
         this.country = country;
     }
 
     /**
-     * Get the type of the user
+     * Get the id of the user
      *
-     * @return id
+     * @return the id of the user
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Set the type of the user
+     * Set the id of the user
      *
-     * @param id
+     * @param id the id of the user
      */
     public void setId(int id) {
         this.id = id;
@@ -88,7 +95,7 @@ public class User {
     /**
      * Get the type of the user
      *
-     * @return type
+     * @return the type of the user
      */
     public String getType() {
         return type;
@@ -97,7 +104,7 @@ public class User {
     /**
      * Set the type of the user
      *
-     * @param type
+     * @param type the type of the user
      */
     public void setType(String type) {
         this.type = type;
@@ -106,7 +113,7 @@ public class User {
     /**
      * Get the Lastname of the user
      *
-     * @return lastName
+     * @return the Lastname of the user
      */
     public String getLastName() {
         return lastName;
@@ -115,7 +122,7 @@ public class User {
     /**
      * Set the Lastname of the user
      *
-     * @param lastName
+     * @param lastName the Lastname of the user
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -124,7 +131,7 @@ public class User {
     /**
      * Get the Firstname of the user
      *
-     * @return firstname
+     * @return firstname the Firstname of the user
      */
     public String getFirstName() {
         return firstName;
@@ -133,7 +140,7 @@ public class User {
     /**
      * Set the Firstname of the user
      *
-     * @param firstName
+     * @param firstName the Firstname of the user
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -142,7 +149,7 @@ public class User {
     /**
      * Get the Email of the user
      *
-     * @return email
+     * @return email the Email of the user
      */
     public String getEmail() {
         return email;
@@ -151,7 +158,7 @@ public class User {
     /**
      * Set the Email of the user
      *
-     * @param email
+     * @param email the Email of the user
      */
     public void setEmail(String email) {
         this.email = email;
@@ -160,7 +167,7 @@ public class User {
     /**
      * Get the invoices of the user
      *
-     * @return invoices
+     * @return invoices the invoices of the user
      */
     public ArrayList<Invoice> getInvoices() {
         return invoices;
@@ -169,12 +176,15 @@ public class User {
     /**
      * Set the invoices of the user
      *
-     * @param invoices
+     * @param invoices the invoices of the user
      */
     public void setInvoices(ArrayList<Invoice> invoices) {
         this.invoices = invoices;
     }
 
+    /**
+     * Log out method to disconnect the user from the website, clear the invoices, the cart and set the user to null
+     */
     public void logout() {
         instance = null;
         id = 0;
@@ -186,10 +196,22 @@ public class User {
         cart.clearCart();
     }
 
+    /**
+     * Add an invoice to the user
+     *
+     * @param invoice the invoice to add
+     */
     public void addInvoice(Invoice invoice) {
         invoices.add(invoice);
     }
 
+    /**
+     * Get an invoice by its id
+     * If the invoice doesn't exist, return null
+     *
+     * @param id the id of the invoice
+     * @return the invoice
+     */
     public Invoice getInvoice(int id) {
         for (Invoice invoice : invoices) {
             if (invoice.getId() == id) {
@@ -199,10 +221,18 @@ public class User {
         return null;
     }
 
+    /**
+     * Cleat the invoices of the user
+     */
     public void clearInvoices() {
         invoices.clear();
     }
 
+    /**
+     * Get the cart of the user
+     *
+     * @return the cart of the user
+     */
     public Cart getCart() {
         return cart;
     }

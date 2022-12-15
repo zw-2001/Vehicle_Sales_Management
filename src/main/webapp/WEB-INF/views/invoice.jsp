@@ -99,16 +99,16 @@
 
         <form action="/invoice-management" method='POST'>
             <c:if test="${invoicePayment == false}">
-                <button type="submit" class="btn btn-facturation btn-outline-dark" value="cash" name="action"
+                <button type="submit" class="btn btn-facturation btn-outline-dark" value="cash" name="payment"
                         style="float : right; margin: 50px 50px 50px 0px">Paiment au comptant
                 </button>
-                <button type="submit" class="btn btn-facturation btn-outline-dark" value="credit3" name="action"
+                <button type="submit" class="btn btn-facturation btn-outline-dark" value="credit3" name="payment"
                         style="float : right; margin: 50px 50px 50px 0px">Paiment à crédit 12 mois
                 </button>
-                <button type="submit" class="btn btn-facturation btn-outline-dark" value="credit6" name="action"
+                <button type="submit" class="btn btn-facturation btn-outline-dark" value="credit6" name="payment"
                         style="float : right; margin: 50px 50px 50px 0px">Paiment à crédit 6 mois
                 </button>
-                <button type="submit" class="btn btn-facturation btn-outline-dark" value="credit12" name="action"
+                <button type="submit" class="btn btn-facturation btn-outline-dark" value="credit12" name="payment"
                         style="float : right; margin: 50px 50px 50px 0px">Paiment à crédit 3 mois
                 </button>
             </c:if>
@@ -127,7 +127,7 @@
 
 <script>
     function generatePDF() {
-        const pdf = document.getElementById('facturation');
+        const pdf = document.getElementById('invoice');
         html2pdf().from(pdf).save("facture.pdf");
     }
 </script>

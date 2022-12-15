@@ -25,7 +25,7 @@
                             <th id="title-form-insc">S'inscrire</th>
                         </tr>
                         <td>
-                            <form action="/signup-check" method="POST" class="connexion-form">
+                            <form action="/register-check" method="POST" class="connexion-form">
                                 <table class="input-fields">
                                     <tr>
                                         <td>Prénom :</td>

@@ -10,9 +10,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * Model of the user controller
+ */
 public class UserDao {
     private Connection con = ConnectionManager.getConnection();
 
+    /**
+     * Check if the user exists in the database
+     *
+     * @param email    The email of the user
+     * @param password The password of the user
+     * @return true if no errors occurred, false otherwise
+     */
     public int loginUser(String email, String password) throws NoSuchAlgorithmException {
         String sql = "SELECT * FROM User, Country WHERE User.Id_Country = Country.Id_Country AND Email = ? AND Password = ?";
         if (con != null) {
@@ -41,7 +51,18 @@ public class UserDao {
         return 0;
     }
 
-    public int signupUser(String type, String email, String password, String lastName, String firstName, String country) throws NoSuchAlgorithmException {
+    /**
+     * Add a new user in the database
+     *
+     * @param type      The type of the user
+     * @param email     The email of the user
+     * @param password  The password of the user
+     * @param lastName  The last name of the user
+     * @param firstName The first name of the user
+     * @param country   The country of the user
+     * @return true if no errors occurred, false otherwise
+     */
+    public int registerUser(String type, String email, String password, String lastName, String firstName, String country) throws NoSuchAlgorithmException {
         String sql = "INSERT INTO User (Id_Country, Type, Email, Password, LastName, FirstName)\n" +
                 "VALUES (\n" +
                 "(SELECT Country.Id_Country\n" +

@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Class to manage the connection to the database
+ */
 public class ConnectionManager {
     private static String url = "jdbc:mysql://localhost:3306/Vehicle_Sales_Management_DB";
     private static String driverName = "com.mysql.cj.jdbc.Driver";
@@ -11,6 +14,12 @@ public class ConnectionManager {
     private static String password = "password";
     private static Connection con;
 
+    /**
+     * Try to connect to the database
+     * If the connection is successful, return the connection
+     *
+     * @return the connection to the database
+     */
     public static Connection getConnection() {
         try {
             Class.forName(driverName);
